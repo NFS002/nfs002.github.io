@@ -1,0 +1,208 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="c2p programming blockchain">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C<sub>2</sub>P">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2019-06-23/ccp.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2019-06-23/ccp.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    C<sub>2</sub>P
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <h3 id="contract-to-product-transaction-ledgers">Contract to product transaction ledgers</h3>
+<p>The idea behind this project was to develop a open and centralised transaction ledger that can be queried for a detailed history on the ownership, history, and exchange of physical products and goods.
+The C2P framework is a network with this ledger at its core, as well as a store of user accounts and products referenced by the ledger. A contract is an abstraction of this framework that describes the exchange or transfer of products  between accounts.</p>
+
+<p>The motivation for this project was to provide transparency and buyer security in the chinese second hand car market, which can be notoriously problematic. Using this framework, a detailed vehicle history can be made openly available to prospective buyers.
+The ledger would contain inforation such as the date and location of original purchase, previous ownership, service, accident, location, and MOT history. This is just one use case of this network. In this case though, it is possible to implement that certain parts of the ledger be updated automtically, although particular event such as accidents must be recorded manually, I hope that vehicle owners would have the motivation to do this 
+to increase the value of the vehicle and attract interest and confidence in buyers.</p>
+
+<p>Products must have a physical identifier intrinsically bound to the product hardware, such as a serial number.
+User accounts must also be tightly bound to a single person, and KYC verification is some cases may also be necessary. All products tracked on the ledger must obviously have an original point at which they began, so designated permissioned accounts must have the ability to create products.</p>
+
+<p>The two diagrams illsustarte the idea in more detail.</p>
+
+<p>The class diagram refers specifically to a java implementation, but it gives some of the basic components and object abstractions required, such as contracts, accounts, and products.</p>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/2.jpeg" alt="C2P java class dagram" />
+    <figcaption>C2P java class dagram</figcaption>
+</figure>
+
+<p>This image shows the recursive relationship between products and contracts. A single product may be referenced my multiple contracts, and a single contact may reference multiple products. A contract must also also reference two accounts: The buyer/owner/giver and the seller/receiver. The process of querying the ledger and tracing back the history of a product to see what contarcts it has been used in, who are the participants of those contracts, and what other products were involved in those contracts can be seen here.</p>
+
+<p>The sequence of events illusrated below shows how a permissioned account A<sub>m</sub> creates 5 proucts, P<sub>0-4</sub>, and then sends a contract C<sub>0</sub> to A <sub>0</sub> products. The double blue lines show how this contract (C<sub>0</sub>) contains all 5 of all these original products. A<sub>0</sub> then decides to keeps P<sub>0</sub>, and sends another contract (C<sub>1</sub>) to A <sub>1</sub>, that contains the remaining 4 products P<sub>1-4</sub>. 
+A<sub>1</sub> then decides to keeps P<sub>1</sub>, and sends another contract (C<sub>2</sub>) to A <sub>2</sub>, that contains the remaining 3 products P<sub>2-4</sub>. 
+This sequential series of events continues with each subsequent contract containing 1 less product than the contract before until each account A<sub>0-5</sub> owns a single product.</p>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/3.jpg" alt="C2P event ledger" />
+    <figcaption>Tracing history on the event ledger </figcaption>
+</figure>
+
+<p>At this point, given any contract or product on the ledger we can see the history of all the contracts a given product was involved in, and in turn all the contracts each product was involved in. The sequence of events given in the example above was purposefully simplistic, but depending on the actual sequence of events recorded on the ledger, it may be possible to realise and form a complete picture of all events recorded on the ledger from any single starting point.</p>
+
+<p>Having said this, for the purpose of privacy, there may be some authentication or security measure implemented to restrict access to particular parts such as accounts or unrelated contracts.</p>
+
+<p>The C2P network is a framework that may be implemented and adapted in different ways and to suit different purposes or retail markets.
+My own implementation to demonstarte this idea, I have developed in Java and deployed on a Tomcat servlet container. The web interafce I write in Javascript, HTML5 and SAS/CSS. I didnt use any component frameworks, although I made heavy use of some popular libraries. The eventual idea behind the interface is to be able to create a user account, write contracts, create and send products, and query the ledger history.</p>
+
+<p>The site isnt quite finished yet, and I havent found an ideal server to deplo it on either, so currently I just able to provide screenshots taken from my own computer.</p>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/1.png" alt="C2P login screen" />
+    <figcaption>The login screen</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/6.png" alt="C2P user dashboard" />
+    <figcaption>The user dashboard</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/5.png" alt="C2P contract write" />
+    <figcaption>Writing a contract</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/8.png" alt="CCP user profile" />
+    <figcaption>Viewing another user profile</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/4.png" alt="C2P contract view" />
+    <figcaption>Viewing contract details</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/ccp/7.png" alt="C2P product view" />
+    <figcaption>Viewin product details</figcaption>
+</figure>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#c2p programming blockchain">#c2p programming blockchain&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        June 23, 2019
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2020.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>
