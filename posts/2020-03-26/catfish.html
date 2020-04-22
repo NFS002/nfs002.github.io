@@ -1,0 +1,193 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="tinder online-dating cs programming">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TinderCatfish: A social network for tinder users">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2020-03-26/catfish.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2020-03-26/catfish.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    TinderCatfish: A social network for tinder users
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <figure style="text-align:center">
+    <img src="/images/catfish/logo.png" alt="TinderCatfish logo" />
+</figure>
+<p>TinderCatfish is a google chrome extension that at allows anyone to anonymously share feedback, comments, or reviews on other peoples tinder profiles. One feature of tinder that everyone may not be aware of is that all users who have a tinder account can create a public internet profile page, with a custom URL of the format
+<code class="highlighter-rouge">www.gotinder.com/@&lt;handle&gt;</code>, where &lt;handle&gt; can be chosen by the user.
+<br /> 
+For example
+<code class="highlighter-rouge">www.gotinder.com/@john_smith</code></p>
+
+<p>Without this chrome extension installed, a Tinder profile page looks like this:</p>
+
+<figure style="text-align:center">
+    <img src="/images/catfish/1.png" alt="Tinder profile url page" />
+    <figcaption>A Tinder profile page</figcaption>
+</figure>
+
+<p>The chrome extension I have written (TinderCatfish) detects whenever you visit one of the pages, and manipulates the DOM content and injects some extra javascript on the page, to rewrite it to look like this:</p>
+
+<figure style="text-align:center">
+    <img src="/images/catfish/2.png" alt="TinderCatfish profile url page" />
+    <figcaption>A TinderCatfish profile page</figcaption>
+</figure>
+
+<p>The idea is that anyone can now leave feedback, comments, or reviews on anyone elses tinder profile. Everything that is posted is persisted in a MongoDB cluster, so anyone else using the extension will be able to see the comments when visiting the same profile page.</p>
+
+<p>One of the biggest reasons why I was motivated to do this is after the death of Grace Millane, it really highlighted how there is a lot big safety issue and potential dangers in online dating, especially since usually youre by yourself and meeting a complete stranger. Having some assurances and feedback left by other people would definetely allow people to feel more comfortable and also hopefully encourage new people who were previosuly apprehensive about using Tinder for this reason.</p>
+
+<p>Ive called it TinderCatfish because aside from the safety issues, this is also a great tool for gossiping about random tinder dates and essentially exposing catfish or psychos.</p>
+
+<h3 id="future-development">Future development</h3>
+
+<p>The current version (V-0.1) is pretty basic, although Ive submitted it to the Google chrome store already, although they said it could potentially take a few weeks to get approved. Im hoping that I can gage some metric of its popularity through this initial release, and then Im planning on adding a bunch of extra features in future versions.</p>
+
+<ol>
+  <li>
+    <p>Searching for someones profile: In Version 0.1 the only way to find someones profile is to already know what their handle is, i.e by asking them on the date. However, I plan to introduce a search functionality that scans all profiles and stores each persons name, age, and occupation, and stores them in the database so they can be queried and searched.
+I havent found a way to get other important information such as location and bio yet, but im looking at possible solutions.</p>
+  </li>
+  <li>
+    <p>Authentication: At the moment anyone can leave a comment under any name, and you can even comment on your own profile. I want to introduce some authentication functionality, so that you <em>can</em> login before you comment, in which case your comment would be automatically approved. If you post a comment without logging in, the comment would be have to be screened rigorously by a moderator to check what is hosted on the source IP, and what other comments came from that IP etc… to check this is an authentic comment. Or something like that…</p>
+  </li>
+  <li>
+    <p>User accounts: Similar to the last point, this would allow users to create TinderCatfish accounts which they could link to their own Tinder profile. You could add and follow other TinderCatfish users and see their activity, including which dates they’ve been on, similar to a social network.</p>
+  </li>
+  <li>
+    <p>Generate profiles: If a tinder user doesnt have a web profile, Id like users to be able to create one on their behalf, using an accurate description and an appproved photo of that person.
+Generated profiles would of course have to be hosted on a different domain.</p>
+  </li>
+  <li>
+    <p>Enriched content: In future versions, posts will be able to consist of more than just plain text, and include other resources such as star ratings and even photos. You will be able to react to other peoples posts (similar to facebook) and filter and search for particular posts within a profile.</p>
+  </li>
+</ol>
+
+<p>Before it gets approved by Google,<a href="https://github.com/NFS002/TinderCatfish"> you can also download it from my Github page here.</a> The backend (Node.js &amp; MongoDb) is <a href="https://github.com/NFS002/CatfishServer">also open source.</a></p>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#tinder online-dating cs programming">#tinder online-dating cs programming&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        March 26, 2020
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2020.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>

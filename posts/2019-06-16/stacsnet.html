@@ -1,0 +1,189 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="stacsnet standrews elearning cs programming">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stacsnet: an e-learning platform for St. Andrews computer science students">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2019-06-16/stacsnet.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2019-06-16/stacsnet.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    Stacsnet: an e-learning platform for St. Andrews computer science students
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <p>The idea for this project came during my undergraduate degree in computer science at St. Andrews University. Stacsnet is a web platform for CS students with three main features:</p>
+<ul>
+  <li>View module content and lecture slides for previous years as well as the current year</li>
+  <li>See class averages, variation, marking trends, and grade boundaries for different modules over the years and submit your own grade.</li>
+  <li>Upload and share your own files (diagrams, lecture notes, exam scripts, etc ..)</li>
+  <li>Ask questions on a particular module or topic (either anonymously or with a username) either directly
+to another lecturer or student, or posted publicly on a message board.</li>
+  <li>Browse and contribute to previous conversation threads and reply to others posts with your own answers</li>
+</ul>
+
+<p>St. Andrews already has a private intranet called studres, where lecturers may upload lecture slides, examples, and other resources need to complete coursework assignments. Studres is OK, but it definetely has its limitations. Only staff may upload on to studres , and its content is generally limited and incomplete. Studres is private, only accessible to matriculated St. Andrews computer science students. However, because studres and lecture slides are often inadequate, most students also use lecture notes made publicly available
+from other universities. I definetely had some some favorite universities when it came to alternate educational resources, and would of found a platform such as this very useful at the time.</p>
+
+<p>When I first created stacsnet, around a year before writing this post, it was slightly different from the version that is available now. Originally, stacsnet contained many of the features listed above, in addition to containing a synced copy of all files posted on studres. When i depolyed this version, I was aksed to take it down, or at least remove the lecture content, due it being copywrighted material. I thought this was odd since it was mostly just a copy of other universities, but I took it down anyway.</p>
+
+<p>Even though the current version of stacsnet does not contain copy over any studres content, I have implemented some authentication features to prevent public access to the site. In order to use most of the features stacsnet, you must create an account, and to do this you need to prove you have acceess to a valid @st-andrews.ac.uk email address. An email address under the st-andrews domain is given to each student when they matriculate. 
+The authentication prevents the general public from being able to use the site, submit phony grades or post irrelevant questions and answers.</p>
+
+<p>Its a bit of an understatement to say that St. Andrews didnt really put the student first, and marking of grades and exams was on occassion was blatantly absurd. I do recognise this to be a problem not just at St. Andrews but across almost all big univerities, and I hoped that ultimately multiple different universities would adopt their own version of this platform as a private intranet, and these networks could then be somehow linked together. Students across universities could collaborate with eachother and share resources, and see how each other are being marked and exactly what level of coursework and exams you could expect. I think not only would this improve student satisfaction but it would put pressure on the university teaching staff to deliver a better and more consistent educational service.</p>
+
+<p>Whilst stacsnet was designed specifically for computer science students, it implements a framework that could easily be adapted for students studying other subjects or at other universities also. All the major features I have briefly described above, I have explored and developed signficantly in this demo site.</p>
+
+<p>The screenshots below illustrate two of these features in further detail:</p>
+
+<ol>
+  <li>Average grades for the module CS2002 in 2018, visualised as an interactive historgram. To preserve anynomity no data is displayed until at least 3 submissions have been made. When we hover over a part of the histogram, the individual marks of the exact grades that contribute to the mean score are displayed.
+Other statistical analysis metrics and measure of central tendency such as standard deviation and variance are also given.</li>
+</ol>
+
+<figure style="text-align:center">
+    <img src="/images/stacsnet/3.png" alt="Stacsnet average grade visulisations" />
+    <figcaption>Average grade visulisations</figcaption>
+</figure>
+
+<ol>
+  <li>When posting a question, you can either start a new thread, or reply to a previous post. There is no limit to depth of replies originating from the original question, and subthreads can branch of at any point. The interface is designed to be easy to navigate, and my implementation of how posts are logically persisted in database storage is simple and easily maintained. The screenshot below shows how you can tag your post with identifiers such as a module code or other keywords, and this can be included with post meta data to allow easy searching and filtering of previous posts.</li>
+</ol>
+
+<figure style="text-align:center">
+    <img src="/images/stacsnet/2.png" alt="Stacsnet average grade visulisations" />
+    <figcaption>Browsing messsage threads</figcaption>
+</figure>
+
+<figure style="text-align:center">
+    <img src="/images/stacsnet/1.png" alt="Stacsnet average grade visulisations" />
+    <figcaption>Replying to questions</figcaption>
+</figure>
+
+<p>I wrote stacsnet mainly using the MVC framework for ASP.NET core (C#). I used SQLite and entity framework core with for the database, and theres a fair amount of javascript also with some Vue components and <a href="https://www.github.com/nfs002/stacsnet"> Ive open sourced it on my github page.</a>
+I did deploy also the site for a while on a cheap linux vps. The built-in server for MVC is called Kestrel and can only listen on localhost so I also had to set up an nginx reverse proxy. Unfortunately, the university didnt like this idea and wouldnt allow me to promote it, so eventually I took the site down.</p>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#stacsnet standrews elearning cs programming">#stacsnet standrews elearning cs programming&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        June 16, 2019
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2020.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>
