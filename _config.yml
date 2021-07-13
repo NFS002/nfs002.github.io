@@ -5,6 +5,7 @@ description:      Personal blog etc ...
 future:      false  # publish future dated posts --  true, false (default) 
 highlighter: rouge
 baseurl: ''
+destination: docs/
 url: "https://www.skydesign.blue"
 markdown:    kramdown
 plugins:
