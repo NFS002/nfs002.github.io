@@ -1,0 +1,165 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="programming software design">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cabaret">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2019-07-27/cabaret.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2019-07-27/cabaret.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    Cabaret
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <h2 id="a-scalable-taxi-dispatch-system">A scalable taxi dispatch system</h2>
+
+<p>Last semester, I took a class in distributed systems. One of the assignements was to design and implement 
+a system which integrates as a component in the backend of an uber-like ( mobile taxi dispatch ) system. 
+As specifications go, it was about as vague as it gets, but the words ‘middleware’ and ‘message-queue’ were said quite a bit.</p>
+
+<p>Ubers current system they use to connect and organise mobile network of consumers and drivers is called DISCO, which is an anagram for something about dispatch optimisation. Theres a pretty detailed blog post about it<a href="https://medium.com/@narengowda/uber-system-design-8b2bc95e2cfe"> here, </a> but essentially its supported by a giant infrastruture and terabytes of data.</p>
+
+<p>For this piece of coursework, I essentially developed my own version of this system using <a href="https://grpc.io/"> gRPC </a> and a <a href="https://en.wikipedia.org/wiki/Chord_(peer-to-peer)"> the chord protocol (a distributed hash table).</a> Alongside each piece of coursework we must submit a report detailing how to build and run the program, along with our design decisions and possible improvements. Below is my  offical report for the coursework, and I have open sourced the project also:</p>
+<h3 id="httpsgithubcomnfs002cabaret"><a href="https://github.com/NFS002/Cabaret">https://github.com/NFS002/Cabaret</a></h3>
+
+<div style="text-align:center">
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-01.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-02.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-03.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-04.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-05.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-06.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-07.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-08.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-09.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-10.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-11.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-12.png" />
+<img alt="CS3301-P2 Report" width="900" src="/images/cabaret/CS3301_P2-13.png" />
+</div>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#programming software design">#programming software design&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        July 27, 2019
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2021.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>
