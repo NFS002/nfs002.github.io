@@ -7,7 +7,7 @@ date-string: November 04, 2021
 ---
 
 <figure  style="text-align:center">
-    <img src="/images/photo-grid/donut-stones.png" alt="Donut Stones">
+    <img src="/images/photo-grid/dripping-donuts.png" alt="Donut Stones">
 </figure>
 
 Donut Stones is a ERC20 cryptocurrency I have started that aims to solve the problem of the (donut economy)[https://doughnuteconomics.org/about-doughnut-economics] 
