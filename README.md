@@ -1,4 +1,6 @@
 # Yet Another Blog
 
-### nfs002.github.io
+## Coding projects and hopefully some ideas
+
+### https://nfs002.github.io
 
