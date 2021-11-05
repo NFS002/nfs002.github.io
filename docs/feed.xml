@@ -5,13 +5,13 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Nov 2021 00:03:19 +0000</pubDate>
-    <lastBuildDate>Fri, 05 Nov 2021 00:03:19 +0000</lastBuildDate>
+    <pubDate>Fri, 05 Nov 2021 00:05:29 +0000</pubDate>
+    <lastBuildDate>Fri, 05 Nov 2021 00:05:29 +0000</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
     
     <item>
-        <title>Donut Stones: an cryptocurrency for social good</title>
+        <title>Donut Stones: A cryptocurrency for social good</title>
         <description>&lt;p&gt;Donut Stones is a ERC20 cryptocurrency I have started that aims to solve the problem of the (donut economy)[https://doughnuteconomics.org/about-doughnut-economics] 
 and the limits to economic growth. The solidity code is open sourced on my &lt;a href=&quot;https://www.github.com/nfs002/donut-stones&quot;&gt;github&lt;/a&gt; and a link to the crowdsale website is below. Ive had some great feedback already on this one and its an extremely important cause so im hoping to develop it further.&lt;/p&gt;
 

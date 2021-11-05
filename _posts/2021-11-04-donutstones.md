@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: posts
-title: "Donut Stones: an cryptocurrency for social good"
+title: "Donut Stones: A cryptocurrency for social good"
 tags: [ crypto economics programming ]
 date-string: November 04, 2021
 ---
