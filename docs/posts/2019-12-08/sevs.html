@@ -101,15 +101,98 @@
                         <p><img src="/images/sevs/secure-voting.jpg" alt="Secure electronic voting system" width="300" />
 <br /></p>
 
-<p>E-Voting has been offered in Estonia for national elections since 2005, but amid a lot of controversy and ridicule. Other smaller state elections in the U.S and around the world have also made attempts at web-based voting, but definetely regretted the decision afterwards. Its fair to say that its not really a thing. Reliable and secure electronic voting seems like a bit of holy grail. Everyone is in agreement that it would be a positive development to the electoral systems themselves, but similarly every computer scientist and security researcher has warned against the sheer impossibility of guaranteeing against all possible security flaws vulnerabilities. A successful system would have to meet an unparalleled standard, and cryptography only goes so far. As of yet, these are some of the key remaining hurdles.</p>
+<h2 id="background">Background</h2>
 
-<h4 id="ddos-mitigation">DDos mitigation</h4>
-<p>It goes without saying why we need to be able to guarantee immunity from DDos attacks, although this in itself isnt really the problem, since many network providers are genuinely able to provide such a service.  Traditionally, most CDN and cloud networks rely on full-proxy, symmetric protection. But that requires full decryption of SSL communications before it is scrubbed, thereby adding latency and violating user privacy.</p>
-<blockquote>
-  <p>An internet-wide scan we conducted found valid TLS certificates for the election website
-being served by servers around the world.
-Other solutions include behavioral and rate-based paramaters, or the <a href="https://www.radware.com/solutions/ssl-protection/">unique keyless hybrid solution offered by Radware.</a></p>
-</blockquote>
+<p>Ok so E-Voting is not a new idea, at all. Apparently 7 US states used some sort of automation even way back in the 1964 presedential election. Today, its actually used in various forms across the world, and some countries even use it for national and parliamentary elections. However, totally reliable and secure electronic voting seems like a bit of holy grail. I think most people are in agreement that it would be a positive development to the electoral systems themselves, but similarly every computer scientist and security researcher has warned against the sheer impossibility of guaranteeing against all possible security flaws and vulnerabilities. I guess that doesnt necessarilly mean its never gonna see wide adoption, but I tend to think that if a new technology is gonna be a hit, its gotta happen fairly quickly after its release. It might be similar to being accused of a crime you didnt commit, once the doubt sets in, its pretty hard to get rid of. And the more serious the crime (or the higher the stakes in the election), it becomes almost impossible to resolve all the residual uncertainty, and in case you were wondering, pairing e-voting with manual voting and giving voters the choice doesnt solve much either. Theres a bunch of different types of e-voting, but one of the main distinctions is the hardware (dedicated device vs computer/web-based), and each has its advantages. Interestingly, some secrity experts claim the problem is not with e-voting, but the inherent unpredictability of computational systems themselves. To be honest, that seems completely ridiculous to me, sure computers can crash randomly or have some untraceable bug, but so can humans ? And the latter actually seems a lot more likely.</p>
+
+<p>I dont doubt that security experts have found security problems in every attempt at online voting, and yes some of these problems simply dont exist in the manual system, but on the whole im not convinced that the traditional system has less flaws.</p>
+
+<p><br /></p>
+
+<p>I think because a lot of people are gonna naturally cautious anyway about any e-voting system, whatever system is used has got to be really really good, and tick all the boxes. Traditional manual voting is definitely susceptible to vote manipulation, miscounting, and so many other security risks. But an e-voting system cant go near any of that stuff, Its gotta be anonymous,  accurate, private, tamper-proof, auditable, consistent, available, distributed, and a lot more. Oh, and its gotta do all this whilst also being simple and transparent, and <em>actually usable to the general public whilst also robust to the general public</em>.</p>
+
+<p><br /></p>
+
+<p>Given all that, I thought it would be fun to come up with my own system design and code my own implementation of an evoting system. 
+Im usually a big fan of keeping things simple, I think its pretty much always a positive attribute to have for several reasons. Having said that, looking back on the same great iventions over the past few hundred years, some of the best ones are extremely complex, which gives me a bit of hope that I didnt totally waste my time trying to create something totally pointless.</p>
+
+<h2 id="temporal-stages-of-the-whole-election">Temporal stages of the whole election</h2>
+
+<p>Ill start by first going over the 6 sequential phases during which the election takes place, and a winner is announced:</p>
+
+<ol>
+  <li>
+    <h4 id="before-registration">Before registration</h4>
+    <p>All services are unavailable, other than information on where/when to register.</p>
+  </li>
+  <li>
+    <h4 id="registration">Registration</h4>
+    <p>All voters must register to vote, providing identity credentials and in return receiving a set of single use keys to authorize the vote.</p>
+  </li>
+  <li>
+    <h4 id="redistributionshuffle-a">Redistribution/shuffle (A)</h4>
+    <p>There are two resdistribution/shuffle stages, and each of them roughly conist of three sub-stages
+ a) <strong>Anonymising</strong> - This means hashing and encrypting all information sent by individual voters.</p>
+
+    <p>b) <strong>Shuffling</strong> - Randomly shuffling the association between who the <em>voter</em> is and who the <em>vote is for</em>.</p>
+
+    <p>c) <strong>Restributing</strong> - Randomly distributing the data across different physical servers.</p>
+  </li>
+  <li>
+    <h4 id="voting">Voting</h4>
+    <p>All registered voters uses the credentials they obtained in stage 2 in addition to further credentials in a highly specific, verbose, and deliberately fragile protocol to cast 
+their vote for their chose candidate</p>
+  </li>
+  <li>
+    <h4 id="redistributionshuffle-b">Redistribution/shuffle (B)</h4>
+  </li>
+  <li>
+    <h3 id="counting-and-sorting">Counting and Sorting</h3>
+    <ul>
+      <li>Votes are counted across multiple distributed servers and the results are collected. The results are not collected and sorted, but rather a consensus is reached across all servers and the winner is decided through an election leadership protocol.</li>
+      <li>Individual votes are then published so the result can be publicly verified.</li>
+    </ul>
+  </li>
+</ol>
+
+<figure style="text-align:center">
+    <img src="/images/sevs/temporal_stages.png" alt="The six tempopral stages of thge electronic election" />
+    <figcaption>The 6 temporal strages of the electronic election</figcaption>
+</figure>
+
+<h2 id="system-architecture">System Architecture</h2>
+
+<p>The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication</p>
+
+<p>On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.</p>
+
+<ol>
+  <li>
+    <h4 id="transfer-time">Transfer Time</h4>
+    <p>The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication
+ server.</p>
+  </li>
+  <li>
+    <h4 id="voting-hour">Voting hour</h4>
+    <p>Similar to the registration hour, a timer gateway will only accept the request if it is made within the voting hour.
+ When a vote is requested, the message must contain 4 headers: Hash(ID),
+ Hash(Nonce), Hash(ID, Nonce, pubkey(Vote)) - i.e the MAC code, and pubkey(vote).
+ The hashed ID and nonce are checked to see if they are included in the mapping it received from the registration server. If they are, the encrypted vote is succesfully extracted from the message (whilst still encrypted), and the mapping is removed from the list.</p>
+  </li>
+  <li>
+    <h4 id="after-voting">After voting</h4>
+    <p>After Voting hour, the data the list of encrypted votes is sent back to the
+ registration server, which then decrypts each of them individually,
+ and sorts the list to find the winner.</p>
+  </li>
+</ol>
+
+<h4 id="ddos-protection">DDoS protection</h4>
+<p>It goes without saying why we need to be able to guarantee immunity from DDos attacks, although this in itself isnt really the problem, since many companies are genuinely able to provide such a service.  Traditionally, most CDN and cloud networks rely on full-proxy, symmetric protection. But that requires full decryption of SSL communications before it is scrubbed, thereby adding latency and violating user privacy, as the decryption keys would have to be replicated on hundreds of CDN servers. In September 2021, nineteen DDoS attacks were registered against Russia’s remote electronic voting system</p>
+
+<h4 id="acessibility">Acessibility</h4>
+
+<p>Essentially, everyone has actually gotta be able to use the system, and just as easily as they did before. DRE systems (like an ATM, but for recording votes) are a popular way of satisfying these requirements, but they dont solve all cases. A system where paper votes are market by hand and counted by a machine is another possibility, but in this case we lose out on some of the benefits of why we might want e-voting in the first place. This might seem trivial, but the role of social and socio-psychological factors is one of the biggest dimensions. For example, Voting from the home increases the likelihood that choices will be discussed within a limited and homogeneous group context, whereas voting in the community may open the voter up to disparate social influence from others, especially those relating to more pro-social or collectivist concerns. Thats just one example of a non-technical problem which doesnt seem like it cant be (or at least shouldnt be) solved with more technology.</p>
 
 <h4 id="confidentiality">Confidentiality</h4>
 <p>Confidentiality in computer networks refers to protecting information from being accessed by unauthorized parties. In the case of e-voting, this translates as only the voter should be able to know who they voted for. The vote server(s), where votes are collected and counted, should be able to validate and see the value of each vote, but not associate that vote back to the original voter, and all other parties should not be able to discern either. In traditional voting, Confidentiality is done easily through physical seperation, but in computer networks this is usually achieved through a combination of cryptographic hash functions, D-H key exchanges, and assymetric keys. Some propososed systems try to mimmick this seperationwith geographically remote servers for the different processes of voter registration, vote sorting, collecting and counting. Crucially, communication between these different processes is restricted.</p>
@@ -136,27 +219,27 @@ know who you have voted for.</p>
 <p>This system can be roughly divided into 5 temporal stages, as shown in figure 1.3 below.</p>
 <ol>
   <li>
-    <h4 id="before-registration">Before registration</h4>
+    <h4 id="before-registration-1">Before registration</h4>
     <p>All services are unavailable, other than information on where/when to register.</p>
   </li>
   <li>
-    <h4 id="registration">Registration</h4>
+    <h4 id="registration-1">Registration</h4>
     <p>On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.</p>
   </li>
   <li>
-    <h4 id="transfer-time">Transfer Time</h4>
+    <h4 id="transfer-time-1">Transfer Time</h4>
     <p>The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication
  server.</p>
   </li>
   <li>
-    <h4 id="voting-hour">Voting hour</h4>
+    <h4 id="voting-hour-1">Voting hour</h4>
     <p>Similar to the registration hour, a timer gateway will only accept the request if it is made within the voting hour.
  When a vote is requested, the message must contain 4 headers: Hash(ID),
  Hash(Nonce), Hash(ID, Nonce, pubkey(Vote)) - i.e the MAC code, and pubkey(vote).
  The hashed ID and nonce are checked to see if they are included in the mapping it received from the registration server. If they are, the encrypted vote is succesfully extracted from the message (whilst still encrypted), and the mapping is removed from the list.</p>
   </li>
   <li>
-    <h4 id="after-voting">After voting</h4>
+    <h4 id="after-voting-1">After voting</h4>
     <p>After Voting hour, the data the list of encrypted votes is sent back to the
  registration server, which then decrypts each of them individually,
  and sorts the list to find the winner.</p>
@@ -200,7 +283,7 @@ know who you have voted for.</p>
                     
                     <!-- POST DATE -->
                     <div class="post-date">
-                        December 10, 2019
+                        January 2, 2021
                     </div>
                 </article>
             </div>
@@ -213,7 +296,7 @@ know who you have voted for.</p>
     <div class="footer-wrapper">
         <footer role="contentinfo">
             <span>
-    SKYDESIGN.BLUE &copy; 2021.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+    SKYDESIGN.BLUE &copy; 2022.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
 </span>
 
         </footer>
