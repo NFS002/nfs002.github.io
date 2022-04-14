@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Apr 2022 16:42:54 +0100</pubDate>
-    <lastBuildDate>Mon, 04 Apr 2022 16:42:54 +0100</lastBuildDate>
+    <pubDate>Thu, 14 Apr 2022 15:31:43 +0100</pubDate>
+    <lastBuildDate>Thu, 14 Apr 2022 15:31:43 +0100</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
     
@@ -233,13 +233,53 @@ their vote for their chose candidate&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/temporal_stages.png&quot; alt=&quot;The six tempopral stages of thge electronic election&quot; /&gt;
+    &lt;img src=&quot;/images/sevs/temporal_stages.png&quot; alt=&quot;The six tempopral stages of the electronic election&quot; /&gt;
     &lt;figcaption&gt;The 6 temporal strages of the electronic election&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&quot;system-architecture&quot;&gt;System Architecture&lt;/h2&gt;
 
-&lt;p&gt;The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication&lt;/p&gt;
+&lt;figure style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/images/sevs/system_architecture.png&quot; alt=&quot;secure electronic voting system architecture&quot; /&gt;
+    &lt;figcaption&gt;System Architecture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The proposed system architecture for this electronic voting system is shown in the diagram above. As you can hopefully see, its not that complicated. This diagram is a pretty big simplification, and doesnt include quite a few infrastructure features such as private subnets, and it also doesnt show the flow of data and order of events/protocols, but I think its a good starting point. Anyway, its not like I even know the complete picture myself, but some key points to note from this diagram are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This a web based system, and so does not rely on dedicated voting machines.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;There are two ‘groups’ of servers, the registration servers and the voting servers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Each group is scalable individually, so there are potentially hundreds or thousands of registration servers, and a similar (but not necessarilly the same) number of voting servers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Similar to MFA, The client performs the registration protocol by interfacing with a sequence of (at least 2) registration servers, and the whole registration process (i.e the combined sequence of registration protocols) requires the client to use at least 2 devices, and the perform the complete protocol sequence with each device.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;protocols&quot;&gt;Protocols&lt;/h2&gt;
+
+&lt;p&gt;Ok, so now lets go through each of the temporal stages individually and illustrate (with the help of diagrams of course) the protocol(s) involved at each stage.&lt;/p&gt;
+
+&lt;h3 id=&quot;before-registration-1&quot;&gt;Before Registration.&lt;/h3&gt;
+&lt;p&gt;Nothing much to say here, everything is closed, any attempt to register or vote will error with instructions on how to register 
+and what documents are required.&lt;/p&gt;
+
+&lt;h3 id=&quot;registration-1&quot;&gt;Registration&lt;/h3&gt;
+
+&lt;p&gt;As I mentioned above, the registration protocol actually takes place with the client interfacing with a sequence of &lt;em&gt;n&lt;/em&gt;  registration servers (where n &amp;gt;= 2). The whole protocol sequence must then be performed &lt;em&gt;i&lt;/em&gt; times (where i &amp;gt;= 2), each time using a different client device. The values of &lt;em&gt;n&lt;/em&gt; and &lt;em&gt;i&lt;/em&gt; dont have to be correlated, but the higher the value of &lt;em&gt;n&lt;/em&gt; and &lt;em&gt;i&lt;/em&gt;, the higher the security guarantees.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-registration-protocol-sequence&quot;&gt;The registration protocol sequence&lt;/h4&gt;
+
+&lt;p&gt;The registration protocol sequence works somewhat like this.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The client (voter) receives in the physical post their polling card as they usually would do, and they use a password present in the envelope (similar to the letter the bank sends you with your pin when you order a new bank card), and in response they send (to any of the registration servers) the password they received in the post, documents verifying their identity such as their passport and a proof of address, as well as a randomly generated client nonce&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.&lt;/p&gt;
 
@@ -296,11 +336,11 @@ know who you have voted for.&lt;/p&gt;
 &lt;p&gt;This system can be roughly divided into 5 temporal stages, as shown in figure 1.3 below.&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;h4 id=&quot;before-registration-1&quot;&gt;Before registration&lt;/h4&gt;
+    &lt;h4 id=&quot;before-registration-2&quot;&gt;Before registration&lt;/h4&gt;
     &lt;p&gt;All services are unavailable, other than information on where/when to register.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h4 id=&quot;registration-1&quot;&gt;Registration&lt;/h4&gt;
+    &lt;h4 id=&quot;registration-2&quot;&gt;Registration&lt;/h4&gt;
     &lt;p&gt;On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
