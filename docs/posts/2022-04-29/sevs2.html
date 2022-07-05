@@ -1,0 +1,322 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="programming networks evoting security">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Secure electronic voting system (version 2)">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2022-04-29/sevs2.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2022-04-29/sevs2.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    A Secure electronic voting system (version 2)
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <p><strong><em>This is version 2 of an <a href="../sevs.html">earlier post</a></em></strong></p>
+
+<h2 id="temporal-stages-of-the-whole-election">Temporal stages of the whole election</h2>
+
+<p>Ill start by first going over the 6 sequential phases during which the election takes place, and a winner is announced:</p>
+
+<ol>
+  <li>
+    <h4 id="before-registration">Before registration</h4>
+    <p>All services are unavailable, other than information on where/when to register.</p>
+  </li>
+  <li>
+    <h4 id="registration">Registration</h4>
+    <p>All voters must register to vote, providing identity credentials and in return receiving a set of single use keys to authorize the vote.</p>
+  </li>
+  <li>
+    <h4 id="redistributionshuffle-a">Redistribution/shuffle (A)</h4>
+    <p>There are two resdistribution/shuffle stages, and each of them roughly conist of three sub-stages
+ a) <strong>Anonymising</strong> - This means hashing and encrypting all information sent by individual voters.</p>
+
+    <p>b) <strong>Shuffling</strong> - Randomly shuffling the association between who the <em>voter</em> is and who the <em>vote is for</em>.</p>
+
+    <p>c) <strong>Restributing</strong> - Randomly distributing the data across different physical servers.</p>
+  </li>
+  <li>
+    <h4 id="voting">Voting</h4>
+    <p>All registered voters uses the credentials they obtained in stage 2 in addition to further credentials in a highly specific, verbose, and deliberately fragile protocol to cast 
+their vote for their chose candidate</p>
+  </li>
+  <li>
+    <h4 id="redistributionshuffle-b">Redistribution/shuffle (B)</h4>
+  </li>
+  <li>
+    <h3 id="counting-and-sorting">Counting and Sorting</h3>
+    <ul>
+      <li>Votes are counted across multiple distributed servers and the results are collected. The results are not collected and sorted, but rather a consensus is reached across all servers and the winner is decided through an election leadership protocol.</li>
+      <li>Individual votes are then published so the result can be publicly verified.</li>
+    </ul>
+  </li>
+</ol>
+
+<figure style="text-align:center">
+    <img src="/images/sevs/temporal_stages.png" alt="The six tempopral stages of the electronic election" />
+    <figcaption>The 6 temporal strages of the electronic election</figcaption>
+</figure>
+
+<h2 id="system-architecture">System Architecture</h2>
+
+<figure style="text-align:center">
+    <img src="/images/sevs/system_architecture.png" alt="secure electronic voting system architecture" />
+    <figcaption>System Architecture</figcaption>
+</figure>
+
+<p>The proposed system architecture for this electronic voting system is shown in the diagram above. As you can hopefully see, its not that complicated. This diagram is a pretty big simplification, and doesnt include quite a few infrastructure features such as private subnets, and it also doesnt show the flow of data and order of events/protocols, but I think its a good starting point. Anyway, its not like I even know the complete picture myself, but some key points to note from this diagram are:</p>
+
+<ul>
+  <li>
+    <p>This a web based system, and so does not rely on dedicated voting machines.</p>
+  </li>
+  <li>
+    <p>There are two ‘groups’ of servers, the registration servers and the voting servers. There are at least 3 registration servers and 1 voting server</p>
+  </li>
+  <li>
+    <p>Each group is scalable individually, so there are potentially thousands of registration servers, and a similar (but not necessarilly the same) number of voting servers.</p>
+  </li>
+  <li>
+    <p>Similar to MFA, The client performs the registration protocol by interfacing with all available (at least 3) registration servers.</p>
+  </li>
+</ul>
+
+<h2 id="protocols">Protocols</h2>
+
+<p>Ok, so now lets go through each of the temporal stages individually and illustrate (with the help of diagrams of course) the protocol(s) involved at each stage.</p>
+
+<h3 id="before-registration-1">Before Registration.</h3>
+<p>Nothing much to say here, everything is closed, any attempt to register or vote will error with instructions on how to register 
+and what documents are required.</p>
+
+<h3 id="registration-1">Registration</h3>
+
+<p>As I mentioned above, the registration protocol actually takes place with the client interfacing with a sequence of <em>n</em>  registration servers (where n &gt;= 3). 
+<strong>Lets call these three registration servers</strong>
+$RS_1 RS_2, RS_3$</p>
+
+<h4 id="the-registration-protocol-sequence">The registration protocol sequence</h4>
+
+<p>The registration protocol sequence works somewhat like this.</p>
+
+<p><strong>Before any network requests, the client ($C$)  generates n random keys, where n is the number of registration servers in the protocol sequence, in the case $n = 3$. One of these keys is chosen to be ‘real’ and the rest are decoys, but the client alone keeps track of which is which. Call these:</strong>
+$Ҝ_1, Ҝ_2, Ҝ_3$</p>
+
+<ol>
+  <li>The client receives in the physical post their polling card as they usually would do, a password ($p_1$) (similar to the letter the bank sends you with your pin when you order a new bank card), and the hostname of the registration server which sent them this letter and in response they send:</li>
+</ol>
+
+<h5 id="a-to-rs_1">a) to $RS_1$:</h5>
+<ul>
+  <li>$p_1$ (the password they just received in the post)</li>
+  <li>A hash of a randomly generated nonce $hash(n_1)$</li>
+  <li>Photos of documents verifying their identity such as a selfie, their passport, and a proof of address</li>
+  <li>Its own identity $C_identity$</li>
+  <li>One of its generated keys ($Ҝ_1$)</li>
+</ul>
+
+<h5 id="b-to-rs_2">b) to $RS_2$:</h5>
+<ul>
+  <li>$hostname(R_1)$</li>
+  <li>$n_1$</li>
+  <li>Another one of its generated keys $Ҝ_2$</li>
+</ul>
+
+<h5 id="b-to-rs_3">b) to $RS_3$:</h5>
+<ul>
+  <li>$hostname(RS_1)$</li>
+  <li>$n_1$</li>
+  <li>The third generated keys $Ҝ_3$</li>
+</ul>
+
+<ol>
+  <li>Both $RS_2$ and $RS_3$ then contact $RS_1$ with
+    <ul>
+      <li>$C_identity$</li>
+      <li>$n_1$</li>
+    </ul>
+  </li>
+</ol>
+
+<p>When $RS_1$ then receives these two requests, it checks to see if the hash of the received $n_1$ is the same as the value received in step 1a). If it is for both requests, and the same identity was requested from both $RS_2$ and $RS_3$, tand the $C_identity$ physical human identity was also successfully verified previously, then $RS_1$ responds with a simple success message.</p>
+
+<ol>
+  <li>At this point, $RS_1 RS_2, RS_3$ are all on the same page and the client has succesfully registered. So, at this point each registration server store appends to a private internal data structure a mapping from ($C_identity$ -&gt; $hash(K_i)$), where $K_i$ is the randomly generated key it received in stage 1.</li>
+</ol>
+
+<h3 id="shuffle-redistribution-a">Shuffle redistribution (a)</h3>
+
+<ol>
+  <li>The private data structures are physically extracted from each of the n registration servers and manually escorted by a convoy of armed vehicle to the voting servers. The mapping that decides which registration server transfers their hard drive to which voting server is distributed randomised and to the extent that no single person or server has full knowledge of the complete mapping.</li>
+</ol>
+
+<h3 id="voting-1">Voting</h3>
+
+<p>The group of authentication servers form a distributed hash map, and 1/3 of records from each of their internal data stuctures are duplicated and distributed across some of the other voting servers.</p>
+
+<ol>
+  <li>Now the votes start to come in, and a single vote is made up of $n$ network requests, (remember, in this case $n = 3$):</li>
+</ol>
+
+<h5 id="a-to-any-randomly-chosen-voting-server">a) to any randomly chosen voting server:</h5>
+
+<ul>
+  <li>$C_identity$</li>
+  <li>($vote_1$, $Ҝ_1$)</li>
+</ul>
+
+<h5 id="b-to-any-other-randomly-chosen-voting-server">b) to any other randomly chosen voting server:</h5>
+
+<ul>
+  <li>$C_identity$</li>
+  <li>($vote_2$, $K_2$)</li>
+</ul>
+
+<h5 id="c-to-any-other-randomly-chosen-voting-server">c) to any other randomly chosen voting server:</h5>
+
+<ul>
+  <li>$C_identity$</li>
+  <li>($vote_3$, $K_3$)</li>
+</ul>
+
+<p><em>Where (for example) the ‘real’ key is $Ҝ_1$, and the clients ‘real’ vote is $vote_1$, the client knows which is their real key and their fake key, and so sends the real key with their ‘real’ vote (i.e the candidate they actually want to vote for), and their decoy key with a fake vote (i.e any other candidate)</em></p>
+
+<ol>
+  <li>
+    <p>Either of the network requests can be directed at any of the voting servers, as all voting servers together form a ring via the <a href="https://www.inf.ed.ac.uk/teaching/courses/ip/chord-desc.html">CHORD protocol</a>, and because the ($C_identity$ -&gt; $hash(K_i)$) mappings are duplicated and randomly distributed, on any voting server receiving a vote request, it performs the following steps:</p>
+  </li>
+  <li>
+    <p>Checks if it has a record for the received $C_identity$, if it does, it calculates the hash of the key in the voring request and if that matches.</p>
+  </li>
+</ol>
+
+<p>0.s which voting servers has a record for (b) and forwards the original request at this server using the <a href="https://www.inf.ed.ac.uk/teaching/courses/ip/chord-desc.html">CHORD protocol</a>.
+If no entry for $C_identity$ is found, an error response is returned to the client.</p>
+
+<p>c) The server checks if the nonce received</p>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#programming networks evoting security">#programming networks evoting security&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        April 29, 2022
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2022.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>

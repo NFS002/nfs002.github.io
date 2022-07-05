@@ -5,10 +5,210 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Apr 2022 15:31:43 +0100</pubDate>
-    <lastBuildDate>Thu, 14 Apr 2022 15:31:43 +0100</lastBuildDate>
+    <pubDate>Tue, 05 Jul 2022 16:38:32 +0100</pubDate>
+    <lastBuildDate>Tue, 05 Jul 2022 16:38:32 +0100</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
+    
+    <item>
+        <title>A Secure electronic voting system (version 2)</title>
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;This is version 2 of an &lt;a href=&quot;../sevs.html&quot;&gt;earlier post&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;temporal-stages-of-the-whole-election&quot;&gt;Temporal stages of the whole election&lt;/h2&gt;
+
+&lt;p&gt;Ill start by first going over the 6 sequential phases during which the election takes place, and a winner is announced:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;h4 id=&quot;before-registration&quot;&gt;Before registration&lt;/h4&gt;
+    &lt;p&gt;All services are unavailable, other than information on where/when to register.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h4 id=&quot;registration&quot;&gt;Registration&lt;/h4&gt;
+    &lt;p&gt;All voters must register to vote, providing identity credentials and in return receiving a set of single use keys to authorize the vote.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h4 id=&quot;redistributionshuffle-a&quot;&gt;Redistribution/shuffle (A)&lt;/h4&gt;
+    &lt;p&gt;There are two resdistribution/shuffle stages, and each of them roughly conist of three sub-stages
+ a) &lt;strong&gt;Anonymising&lt;/strong&gt; - This means hashing and encrypting all information sent by individual voters.&lt;/p&gt;
+
+    &lt;p&gt;b) &lt;strong&gt;Shuffling&lt;/strong&gt; - Randomly shuffling the association between who the &lt;em&gt;voter&lt;/em&gt; is and who the &lt;em&gt;vote is for&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;p&gt;c) &lt;strong&gt;Restributing&lt;/strong&gt; - Randomly distributing the data across different physical servers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h4 id=&quot;voting&quot;&gt;Voting&lt;/h4&gt;
+    &lt;p&gt;All registered voters uses the credentials they obtained in stage 2 in addition to further credentials in a highly specific, verbose, and deliberately fragile protocol to cast 
+their vote for their chose candidate&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h4 id=&quot;redistributionshuffle-b&quot;&gt;Redistribution/shuffle (B)&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h3 id=&quot;counting-and-sorting&quot;&gt;Counting and Sorting&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Votes are counted across multiple distributed servers and the results are collected. The results are not collected and sorted, but rather a consensus is reached across all servers and the winner is decided through an election leadership protocol.&lt;/li&gt;
+      &lt;li&gt;Individual votes are then published so the result can be publicly verified.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/images/sevs/temporal_stages.png&quot; alt=&quot;The six tempopral stages of the electronic election&quot; /&gt;
+    &lt;figcaption&gt;The 6 temporal strages of the electronic election&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;system-architecture&quot;&gt;System Architecture&lt;/h2&gt;
+
+&lt;figure style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/images/sevs/system_architecture.png&quot; alt=&quot;secure electronic voting system architecture&quot; /&gt;
+    &lt;figcaption&gt;System Architecture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The proposed system architecture for this electronic voting system is shown in the diagram above. As you can hopefully see, its not that complicated. This diagram is a pretty big simplification, and doesnt include quite a few infrastructure features such as private subnets, and it also doesnt show the flow of data and order of events/protocols, but I think its a good starting point. Anyway, its not like I even know the complete picture myself, but some key points to note from this diagram are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This a web based system, and so does not rely on dedicated voting machines.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;There are two ‘groups’ of servers, the registration servers and the voting servers. There are at least 3 registration servers and 1 voting server&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Each group is scalable individually, so there are potentially thousands of registration servers, and a similar (but not necessarilly the same) number of voting servers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Similar to MFA, The client performs the registration protocol by interfacing with all available (at least 3) registration servers.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;protocols&quot;&gt;Protocols&lt;/h2&gt;
+
+&lt;p&gt;Ok, so now lets go through each of the temporal stages individually and illustrate (with the help of diagrams of course) the protocol(s) involved at each stage.&lt;/p&gt;
+
+&lt;h3 id=&quot;before-registration-1&quot;&gt;Before Registration.&lt;/h3&gt;
+&lt;p&gt;Nothing much to say here, everything is closed, any attempt to register or vote will error with instructions on how to register 
+and what documents are required.&lt;/p&gt;
+
+&lt;h3 id=&quot;registration-1&quot;&gt;Registration&lt;/h3&gt;
+
+&lt;p&gt;As I mentioned above, the registration protocol actually takes place with the client interfacing with a sequence of &lt;em&gt;n&lt;/em&gt;  registration servers (where n &amp;gt;= 3). 
+&lt;strong&gt;Lets call these three registration servers&lt;/strong&gt;
+$RS_1 RS_2, RS_3$&lt;/p&gt;
+
+&lt;h4 id=&quot;the-registration-protocol-sequence&quot;&gt;The registration protocol sequence&lt;/h4&gt;
+
+&lt;p&gt;The registration protocol sequence works somewhat like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Before any network requests, the client ($C$)  generates n random keys, where n is the number of registration servers in the protocol sequence, in the case $n = 3$. One of these keys is chosen to be ‘real’ and the rest are decoys, but the client alone keeps track of which is which. Call these:&lt;/strong&gt;
+$Ҝ_1, Ҝ_2, Ҝ_3$&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The client receives in the physical post their polling card as they usually would do, a password ($p_1$) (similar to the letter the bank sends you with your pin when you order a new bank card), and the hostname of the registration server which sent them this letter and in response they send:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;a-to-rs_1&quot;&gt;a) to $RS_1$:&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;$p_1$ (the password they just received in the post)&lt;/li&gt;
+  &lt;li&gt;A hash of a randomly generated nonce $hash(n_1)$&lt;/li&gt;
+  &lt;li&gt;Photos of documents verifying their identity such as a selfie, their passport, and a proof of address&lt;/li&gt;
+  &lt;li&gt;Its own identity $C_identity$&lt;/li&gt;
+  &lt;li&gt;One of its generated keys ($Ҝ_1$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;b-to-rs_2&quot;&gt;b) to $RS_2$:&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;$hostname(R_1)$&lt;/li&gt;
+  &lt;li&gt;$n_1$&lt;/li&gt;
+  &lt;li&gt;Another one of its generated keys $Ҝ_2$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;b-to-rs_3&quot;&gt;b) to $RS_3$:&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;$hostname(RS_1)$&lt;/li&gt;
+  &lt;li&gt;$n_1$&lt;/li&gt;
+  &lt;li&gt;The third generated keys $Ҝ_3$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Both $RS_2$ and $RS_3$ then contact $RS_1$ with
+    &lt;ul&gt;
+      &lt;li&gt;$C_identity$&lt;/li&gt;
+      &lt;li&gt;$n_1$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When $RS_1$ then receives these two requests, it checks to see if the hash of the received $n_1$ is the same as the value received in step 1a). If it is for both requests, and the same identity was requested from both $RS_2$ and $RS_3$, tand the $C_identity$ physical human identity was also successfully verified previously, then $RS_1$ responds with a simple success message.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;At this point, $RS_1 RS_2, RS_3$ are all on the same page and the client has succesfully registered. So, at this point each registration server store appends to a private internal data structure a mapping from ($C_identity$ -&amp;gt; $hash(K_i)$), where $K_i$ is the randomly generated key it received in stage 1.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;shuffle-redistribution-a&quot;&gt;Shuffle redistribution (a)&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The private data structures are physically extracted from each of the n registration servers and manually escorted by a convoy of armed vehicle to the voting servers. The mapping that decides which registration server transfers their hard drive to which voting server is distributed randomised and to the extent that no single person or server has full knowledge of the complete mapping.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;voting-1&quot;&gt;Voting&lt;/h3&gt;
+
+&lt;p&gt;The group of authentication servers form a distributed hash map, and 1/3 of records from each of their internal data stuctures are duplicated and distributed across some of the other voting servers.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Now the votes start to come in, and a single vote is made up of $n$ network requests, (remember, in this case $n = 3$):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;a-to-any-randomly-chosen-voting-server&quot;&gt;a) to any randomly chosen voting server:&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$C_identity$&lt;/li&gt;
+  &lt;li&gt;($vote_1$, $Ҝ_1$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;b-to-any-other-randomly-chosen-voting-server&quot;&gt;b) to any other randomly chosen voting server:&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$C_identity$&lt;/li&gt;
+  &lt;li&gt;($vote_2$, $K_2$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;c-to-any-other-randomly-chosen-voting-server&quot;&gt;c) to any other randomly chosen voting server:&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$C_identity$&lt;/li&gt;
+  &lt;li&gt;($vote_3$, $K_3$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Where (for example) the ‘real’ key is $Ҝ_1$, and the clients ‘real’ vote is $vote_1$, the client knows which is their real key and their fake key, and so sends the real key with their ‘real’ vote (i.e the candidate they actually want to vote for), and their decoy key with a fake vote (i.e any other candidate)&lt;/em&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Either of the network requests can be directed at any of the voting servers, as all voting servers together form a ring via the &lt;a href=&quot;https://www.inf.ed.ac.uk/teaching/courses/ip/chord-desc.html&quot;&gt;CHORD protocol&lt;/a&gt;, and because the ($C_identity$ -&amp;gt; $hash(K_i)$) mappings are duplicated and randomly distributed, on any voting server receiving a vote request, it performs the following steps:&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Checks if it has a record for the received $C_identity$, if it does, it calculates the hash of the key in the voring request and if that matches.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;0.s which voting servers has a record for (b) and forwards the original request at this server using the &lt;a href=&quot;https://www.inf.ed.ac.uk/teaching/courses/ip/chord-desc.html&quot;&gt;CHORD protocol&lt;/a&gt;.
+If no entry for $C_identity$ is found, an error response is returned to the client.&lt;/p&gt;
+
+&lt;p&gt;c) The server checks if the nonce received&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Apr 2022 00:00:00 +0100</pubDate>
+        
+        <link>/posts/2022-04-29/sevs2.html</link>
+          
+        
+            <category>programming networks evoting security</category>
+        
+          
+        
+            <category>posts</category>
+        
+          
+      </item>
     
     <item>
         <title>Donut Stones: A cryptocurrency for social good</title>
@@ -37,9 +237,27 @@ and the limits to economic growth. The solidity code is open sourced on my &lt;a
     &lt;img src=&quot;/images/photo-grid/gallery.png&quot; alt=&quot;Gallery logo&quot; /&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;Im writing about this project before I actually implement it, which is not how i usually do things, but ill udate this post when I do actually finish it. A few of my family members are quite ‘artsy’ and they are creative and can draw and paint well. I personally really enjoy and appreciste art but thats where the story ends. A lot of their college and school friends would consider themselves upcoming artists and also produce some amazing stuff. Recently, there was a week organised around the area in north London where I live in which all sort of different artists (painters, sculptors, potters, photographers, etc…) exhbited their own work in a gallery based inside their own homes (e.g in the TV room), so that anyone could knock on their door and have a look around the exhibition. The art mostly was for sale, but the exhibition itself was free. Details of all the artists and exhibitions were posted on a centralised website beforehand, so people could plan their trip and in what order to visit different houses. The rise of the ‘gig economy’ and different P2P platforms that connects end users offering all sorts of paid services (e.g Uber, AirBnB, Deliveroo) inspired me to design and implement a similar platform where upoming artists could either pay someone else to home-exhibit, or home-exhibit themselves. Anyone running a gallery from their own home may be hosting work from multiple different artists, and similarly a new artist could exhibit someone elses work, earning money for doing so and also gaining exposure by having people come and view their work who were may have only been initially interetsed in the more well known artist. This platform would be available as a website and possible a mobile app, that could connect artists and exhibitors from different cities, and also simulatenously serve as a hub where anyone can find information and the address of home-galleries and exhibitions near them, and also search for particular artists.&lt;/p&gt;
+&lt;h1 id=&quot;gallery&quot;&gt;Gallery&lt;/h1&gt;
 
-&lt;h2 id=&quot;more-to-follow&quot;&gt;More to follow…&lt;/h2&gt;
+&lt;h3 id=&quot;gallery-is-a-simple-web-app-that-builds-a-network-based-on-3-archetypes&quot;&gt;Gallery is a simple web app that builds a network based on 3 archetypes:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Hosts. Anyone can sign up to be a host, the host role entails that you are willing to be contacted
+by artists who have signed up fot the platform and would potentially agree to host and display
+some artists work whom you have met and spoken with to the public on arranged times/dates.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Artists are pretty much what you would expect. For example, someone who has created a small collection of
+pottery can sign up to this platform, contact hosts in their area and hopefully arrange a home exhibition.00&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Viewers, anyone with an interest in appreciating art can browse current exhibitions and their location on gallery,
+and then email the host via gallery to check if they can come for a viewing.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As usual, &lt;a href=&quot;https://github.com/NFS002/gallery&quot;&gt;the full source code can be found on my github&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 20 Apr 2020 00:00:00 +0100</pubDate>
         
@@ -191,194 +409,7 @@ General usage:
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Given all that, I thought it would be fun to come up with my own system design and code my own implementation of an evoting system. 
-Im usually a big fan of keeping things simple, I think its pretty much always a positive attribute to have for several reasons. Having said that, looking back on the same great iventions over the past few hundred years, some of the best ones are extremely complex, which gives me a bit of hope that I didnt totally waste my time trying to create something totally pointless.&lt;/p&gt;
-
-&lt;h2 id=&quot;temporal-stages-of-the-whole-election&quot;&gt;Temporal stages of the whole election&lt;/h2&gt;
-
-&lt;p&gt;Ill start by first going over the 6 sequential phases during which the election takes place, and a winner is announced:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;before-registration&quot;&gt;Before registration&lt;/h4&gt;
-    &lt;p&gt;All services are unavailable, other than information on where/when to register.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;registration&quot;&gt;Registration&lt;/h4&gt;
-    &lt;p&gt;All voters must register to vote, providing identity credentials and in return receiving a set of single use keys to authorize the vote.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;redistributionshuffle-a&quot;&gt;Redistribution/shuffle (A)&lt;/h4&gt;
-    &lt;p&gt;There are two resdistribution/shuffle stages, and each of them roughly conist of three sub-stages
- a) &lt;strong&gt;Anonymising&lt;/strong&gt; - This means hashing and encrypting all information sent by individual voters.&lt;/p&gt;
-
-    &lt;p&gt;b) &lt;strong&gt;Shuffling&lt;/strong&gt; - Randomly shuffling the association between who the &lt;em&gt;voter&lt;/em&gt; is and who the &lt;em&gt;vote is for&lt;/em&gt;.&lt;/p&gt;
-
-    &lt;p&gt;c) &lt;strong&gt;Restributing&lt;/strong&gt; - Randomly distributing the data across different physical servers.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;voting&quot;&gt;Voting&lt;/h4&gt;
-    &lt;p&gt;All registered voters uses the credentials they obtained in stage 2 in addition to further credentials in a highly specific, verbose, and deliberately fragile protocol to cast 
-their vote for their chose candidate&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;redistributionshuffle-b&quot;&gt;Redistribution/shuffle (B)&lt;/h4&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h3 id=&quot;counting-and-sorting&quot;&gt;Counting and Sorting&lt;/h3&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Votes are counted across multiple distributed servers and the results are collected. The results are not collected and sorted, but rather a consensus is reached across all servers and the winner is decided through an election leadership protocol.&lt;/li&gt;
-      &lt;li&gt;Individual votes are then published so the result can be publicly verified.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/temporal_stages.png&quot; alt=&quot;The six tempopral stages of the electronic election&quot; /&gt;
-    &lt;figcaption&gt;The 6 temporal strages of the electronic election&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;system-architecture&quot;&gt;System Architecture&lt;/h2&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/system_architecture.png&quot; alt=&quot;secure electronic voting system architecture&quot; /&gt;
-    &lt;figcaption&gt;System Architecture&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The proposed system architecture for this electronic voting system is shown in the diagram above. As you can hopefully see, its not that complicated. This diagram is a pretty big simplification, and doesnt include quite a few infrastructure features such as private subnets, and it also doesnt show the flow of data and order of events/protocols, but I think its a good starting point. Anyway, its not like I even know the complete picture myself, but some key points to note from this diagram are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;This a web based system, and so does not rely on dedicated voting machines.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;There are two ‘groups’ of servers, the registration servers and the voting servers.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Each group is scalable individually, so there are potentially hundreds or thousands of registration servers, and a similar (but not necessarilly the same) number of voting servers.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Similar to MFA, The client performs the registration protocol by interfacing with a sequence of (at least 2) registration servers, and the whole registration process (i.e the combined sequence of registration protocols) requires the client to use at least 2 devices, and the perform the complete protocol sequence with each device.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;protocols&quot;&gt;Protocols&lt;/h2&gt;
-
-&lt;p&gt;Ok, so now lets go through each of the temporal stages individually and illustrate (with the help of diagrams of course) the protocol(s) involved at each stage.&lt;/p&gt;
-
-&lt;h3 id=&quot;before-registration-1&quot;&gt;Before Registration.&lt;/h3&gt;
-&lt;p&gt;Nothing much to say here, everything is closed, any attempt to register or vote will error with instructions on how to register 
-and what documents are required.&lt;/p&gt;
-
-&lt;h3 id=&quot;registration-1&quot;&gt;Registration&lt;/h3&gt;
-
-&lt;p&gt;As I mentioned above, the registration protocol actually takes place with the client interfacing with a sequence of &lt;em&gt;n&lt;/em&gt;  registration servers (where n &amp;gt;= 2). The whole protocol sequence must then be performed &lt;em&gt;i&lt;/em&gt; times (where i &amp;gt;= 2), each time using a different client device. The values of &lt;em&gt;n&lt;/em&gt; and &lt;em&gt;i&lt;/em&gt; dont have to be correlated, but the higher the value of &lt;em&gt;n&lt;/em&gt; and &lt;em&gt;i&lt;/em&gt;, the higher the security guarantees.&lt;/p&gt;
-
-&lt;h4 id=&quot;the-registration-protocol-sequence&quot;&gt;The registration protocol sequence&lt;/h4&gt;
-
-&lt;p&gt;The registration protocol sequence works somewhat like this.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The client (voter) receives in the physical post their polling card as they usually would do, and they use a password present in the envelope (similar to the letter the bank sends you with your pin when you order a new bank card), and in response they send (to any of the registration servers) the password they received in the post, documents verifying their identity such as their passport and a proof of address, as well as a randomly generated client nonce&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;transfer-time&quot;&gt;Transfer Time&lt;/h4&gt;
-    &lt;p&gt;The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication
- server.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;voting-hour&quot;&gt;Voting hour&lt;/h4&gt;
-    &lt;p&gt;Similar to the registration hour, a timer gateway will only accept the request if it is made within the voting hour.
- When a vote is requested, the message must contain 4 headers: Hash(ID),
- Hash(Nonce), Hash(ID, Nonce, pubkey(Vote)) - i.e the MAC code, and pubkey(vote).
- The hashed ID and nonce are checked to see if they are included in the mapping it received from the registration server. If they are, the encrypted vote is succesfully extracted from the message (whilst still encrypted), and the mapping is removed from the list.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;after-voting&quot;&gt;After voting&lt;/h4&gt;
-    &lt;p&gt;After Voting hour, the data the list of encrypted votes is sent back to the
- registration server, which then decrypts each of them individually,
- and sorts the list to find the winner.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;ddos-protection&quot;&gt;DDoS protection&lt;/h4&gt;
-&lt;p&gt;It goes without saying why we need to be able to guarantee immunity from DDos attacks, although this in itself isnt really the problem, since many companies are genuinely able to provide such a service.  Traditionally, most CDN and cloud networks rely on full-proxy, symmetric protection. But that requires full decryption of SSL communications before it is scrubbed, thereby adding latency and violating user privacy, as the decryption keys would have to be replicated on hundreds of CDN servers. In September 2021, nineteen DDoS attacks were registered against Russia’s remote electronic voting system&lt;/p&gt;
-
-&lt;h4 id=&quot;acessibility&quot;&gt;Acessibility&lt;/h4&gt;
-
-&lt;p&gt;Essentially, everyone has actually gotta be able to use the system, and just as easily as they did before. DRE systems (like an ATM, but for recording votes) are a popular way of satisfying these requirements, but they dont solve all cases. A system where paper votes are market by hand and counted by a machine is another possibility, but in this case we lose out on some of the benefits of why we might want e-voting in the first place. This might seem trivial, but the role of social and socio-psychological factors is one of the biggest dimensions. For example, Voting from the home increases the likelihood that choices will be discussed within a limited and homogeneous group context, whereas voting in the community may open the voter up to disparate social influence from others, especially those relating to more pro-social or collectivist concerns. Thats just one example of a non-technical problem which doesnt seem like it cant be (or at least shouldnt be) solved with more technology.&lt;/p&gt;
-
-&lt;h4 id=&quot;confidentiality&quot;&gt;Confidentiality&lt;/h4&gt;
-&lt;p&gt;Confidentiality in computer networks refers to protecting information from being accessed by unauthorized parties. In the case of e-voting, this translates as only the voter should be able to know who they voted for. The vote server(s), where votes are collected and counted, should be able to validate and see the value of each vote, but not associate that vote back to the original voter, and all other parties should not be able to discern either. In traditional voting, Confidentiality is done easily through physical seperation, but in computer networks this is usually achieved through a combination of cryptographic hash functions, D-H key exchanges, and assymetric keys. Some propososed systems try to mimmick this seperationwith geographically remote servers for the different processes of voter registration, vote sorting, collecting and counting. Crucially, communication between these different processes is restricted.&lt;/p&gt;
-
-&lt;h4 id=&quot;anonymity-and-privacy&quot;&gt;Anonymity and privacy&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/ThreeBallot&quot;&gt;ThreeBallot&lt;/a&gt; is a conceptual system with some intersting security features, and in my own design I have simplified and slightly adapated the basic components of ThreeBallot to extract only the most crucial properties of voter &lt;b&gt;privacy&lt;/b&gt; and &lt;b&gt;anonymity.&lt;/b&gt; Similar to confidentiality, voter anonymity in this case would ensure that inspecting the content and value of any single vote would not reveal the identity of the voter. In traditional manual systems, we dont need to write our names on votes so this is not a problem, but in electronic systems, each vote must be &lt;b&gt;authenticated&lt;/b&gt; as belonging to a legitimate registered voter by marking the network packet containing the vote with some preconfigured identifier. It is problematic for a vote to be both authenticated and anonmymous but in this NBallot system, each voter votes in total n times ( where n is the number of candidates ), but (n - 1) of these votes will be redundant, and the remaining vote indicates the ‘real’ choice of candidate. How exactly votes are indicated as redundant could vary accoriding to implememtation, and in the original ThreeBallot system used negative voting,but in my own design, there is some key (in addition to any other encryption) that can only be interpreted by the vote collecting server and may be preconfigured at the time of voter registration. Since inspecting a single vote doesnt reveal anything about the ‘real’ choice of candidate, we could use the preferred form of SSL proxy DDos mitigation.&lt;/p&gt;
-
-&lt;h4 id=&quot;integrity&quot;&gt;Integrity&lt;/h4&gt;
-&lt;p&gt;Integrity, in the context of computer systems, refers to methods of ensuring that data is real, accurate and safeguarded from unauthorized user modification. With traditional paper balloting and hand counting, the entire process is not only clearly visible to those observing it, but it is also easily understandable to the average voter. The ballot box can be shown to be empty at the start of voting by polling staff, then sealed, observed in the polling station to ensure that only legitimate voters are putting in ballots, and at the end of voting the seal can be broken and the ballots counted in full view of observers. Therefore, most previous work on guaranteeing integrity in e-voting systems tries to promote transparency and verifiability as tools for ensuring the integrity of votes. &lt;b&gt;Transparency&lt;/b&gt; refers to how easily third parties may observe and monitor that each counting and sorting process is completed correctly.
-&lt;b&gt;Verifiability&lt;/b&gt; has two meanings: At the individual level, all voters should be able to
-verify that their votes have been correctly recorded and have been correctly included into the tally. At the universal level, anyone in the world should be able to verify the integrity of the tallying result, based on publicly available audit data. So while ensuring that voting and counting technologies are transparent does not alone guarantee that technologies will generate accurate results, it does provide the space and tools to do so. Audit trails and voter receipts are the usual mechanisms. However, in other aspects of computer network security, crypytographic hash functions, checksums and MAC codes can be used to prove that a message has been tampered or subject to MiTM attacks. The possibility of retransmission or restoring from a back-up copy must exists in this case. In NBallot, It seems we could that we could say with a high degree of certainty that votes have at least not been tampered or corrupted in transmission because any third party know could not know how to intepret the decoy keys, and which vote represents a genuine choice. Selecting a packet in the group at random and modifying its value would also fail, since each group of n votes must be authenticated by the collecting server as conforming to the rules and format of the NBallot system. Each decoy key must be unique in that group, and each group of decoy keys is chosen by the voter at registration time, and recorded by the server. In any of these keys have been modified, or any other formatting constraint fails, the whole group is void and should be retransmitted. &lt;b&gt;Voter registration&lt;/b&gt; is a prerequisite to voting whereby each personE who wishes to vote must register their intention with the electoral authorities, similar to the process of registering to vote in any election. The difference is that, in this system, each voter receives a unique identification number (Voter ID), which is then used to compute a digital signature on all of their network votes. After the election, all voter IDs and their chosen candidates could be posted on a public website. Without sacrificing voter privacy, each individual voter could verify that their own vote had been correctly recorded, and any third party may check that all votes has been counted and sorted correctly, and the correct candidate elected. The process of secure voter registration is complex and is detailed later.&lt;/p&gt;
-
-&lt;p&gt;The security requirements of such a system come in many forms, and was always going to be a major issue, but cryptography can only so far. For example, any reliable system necessity will have to be able to secure and not vulnerable to DDos attacks. Network providers like Cloudflare, Akamai, or Emblaze do provide such a service, but at the unacceptable cost of unencrypted packet inspection.&lt;/p&gt;
-
-&lt;p&gt;The implementation was suppossed to satisfy coursework requirements, and so parts of it could definitely be improved. For example, my own shoddy implementation of SSL.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The system must allow only votes for a predefined list of candidates, and from a predefined
-list of voters, where the the two lists are equal. Votes must be anonymous and totally secure,
-so no one, neither the server(s), possible attackers on the network, nor other candidates can
-know who you have voted for.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This system can be roughly divided into 5 temporal stages, as shown in figure 1.3 below.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;before-registration-2&quot;&gt;Before registration&lt;/h4&gt;
-    &lt;p&gt;All services are unavailable, other than information on where/when to register.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;registration-2&quot;&gt;Registration&lt;/h4&gt;
-    &lt;p&gt;On receiving any request, the server passes the request to a timer gateway (which holds information about the designated registration time) and which look will the current time, and then either reject the client, or forward it to the registration service (probably on the same physical server) if the request is made within the registration hour. The request message is then read in full, validated and parsed. A valid request can only be a key request at this stage, where the clients ID number, configured in a configuration file or something (indicating that this client id allowed to register) is sent as a header with the request. An internal dictionary data structure, is checked to see if this ID has already made a previous failed or succesfull request, and a new nonce is generated and sent back to the client, along with the public key of the server accordingly.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;transfer-time-1&quot;&gt;Transfer Time&lt;/h4&gt;
-    &lt;p&gt;The mapping from ID numbers of registered voters to nonces is hashed (each ID number and nonce is hashed individually, so the map retains its structure) and the result is sent to the authentication
- server.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;voting-hour-1&quot;&gt;Voting hour&lt;/h4&gt;
-    &lt;p&gt;Similar to the registration hour, a timer gateway will only accept the request if it is made within the voting hour.
- When a vote is requested, the message must contain 4 headers: Hash(ID),
- Hash(Nonce), Hash(ID, Nonce, pubkey(Vote)) - i.e the MAC code, and pubkey(vote).
- The hashed ID and nonce are checked to see if they are included in the mapping it received from the registration server. If they are, the encrypted vote is succesfully extracted from the message (whilst still encrypted), and the mapping is removed from the list.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;after-voting-1&quot;&gt;After voting&lt;/h4&gt;
-    &lt;p&gt;After Voting hour, the data the list of encrypted votes is sent back to the
- registration server, which then decrypts each of them individually,
- and sorts the list to find the winner.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In total there are 3+ registration servers, and a single voting server. Every client has to register with all registration servers to receives the public key of each server, and once they have registered, they must vote as many times as there registration servers, each vote in its own request and encryted with a different public key.  Each registration server then maintains a list of all clients registered on that server, and then only common entries on all registration lists will be authorised to vote. There can infact be any number of registration servers, but the more there are, the more confidently we can cofirm the true identity of the client as being on the list of pre-configured authorised voters, because, similar to 2FA, each potential voter would be told about the location and time of registration hour on each registration server via a different medium of communication. Since the the client must repeat their vote for as many registration servers as there are, each vote must be for the same candidate in order for it to be counted, and even if any two of the registration servers did communicate with each other to try and work out who had voted for who, they could not without the cooperation of all others. In conbination with an HMAC tag on each repeated vote, as the number of registration servers increases, the possibility or threat of fabrication or modification becomes negligible.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/periods.png&quot; alt=&quot;The five time periods&quot; /&gt;
-    &lt;figcaption&gt;The five time periods&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/arc1.png&quot; alt=&quot;The two types of server&quot; /&gt;
-    &lt;figcaption&gt;The two types of server&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/sevs/arc2.png&quot; alt=&quot;A event flow for a single clients request pattern whilst registering and voting.&quot; /&gt;
-    &lt;figcaption&gt;A event flow for a single clients request pattern whilst registering and voting.&lt;/figcaption&gt;
-&lt;/figure&gt;
+Im a big fan of keeping things simple, I think its pretty much always a positive attribute to have for several reasons. Having said that, looking back on the same great iventions over the past few hundred years, some of the best ones are extremely complex, which gives me a bit of hope that I didnt totally waste my time trying to create something totally pointless. Either way, I gave up on the complex version, and went back to basics. Now, its just a relatively simple client server system with strong hints of &lt;a href=&quot;https://en.wikipedia.org/wiki/ThreeBallot&quot;&gt;ThreeBallot&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The original implementation for this project was written in Java, and the source code is available from my &lt;a href=&quot;https://www.github.com/nfs002&quot;&gt;Github Page&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -574,92 +605,6 @@ Theres plenty of other cases of charities using web based mining for fundraising
           
         
             <category>crypto programming</category>
-        
-          
-        
-            <category>posts</category>
-        
-          
-      </item>
-    
-    <item>
-        <title>C&lt;sub&gt;2&lt;/sub&gt;P</title>
-        <description>&lt;h3 id=&quot;contract-to-product-transaction-ledgers&quot;&gt;Contract to product transaction ledgers&lt;/h3&gt;
-&lt;p&gt;The idea behind this project was to develop a open and centralised transaction ledger that can be queried for a detailed history on the ownership, history, and exchange of physical products and goods.
-The C2P framework is a network with this ledger at its core, as well as a store of user accounts and products referenced by the ledger. A contract is an abstraction of this framework that describes the exchange or transfer of products  between accounts.&lt;/p&gt;
-
-&lt;p&gt;The motivation for this project was to provide transparency and buyer security in the chinese second hand car market, which can be notoriously problematic. Using this framework, a detailed vehicle history can be made openly available to prospective buyers.
-The ledger would contain inforation such as the date and location of original purchase, previous ownership, service, accident, location, and MOT history. This is just one use case of this network. In this case though, it is possible to implement that certain parts of the ledger be updated automtically, although particular event such as accidents must be recorded manually, I hope that vehicle owners would have the motivation to do this 
-to increase the value of the vehicle and attract interest and confidence in buyers.&lt;/p&gt;
-
-&lt;p&gt;Products must have a physical identifier intrinsically bound to the product hardware, such as a serial number.
-User accounts must also be tightly bound to a single person, and KYC verification is some cases may also be necessary. All products tracked on the ledger must obviously have an original point at which they began, so designated permissioned accounts must have the ability to create products.&lt;/p&gt;
-
-&lt;p&gt;The two diagrams illsustarte the idea in more detail.&lt;/p&gt;
-
-&lt;p&gt;The class diagram refers specifically to a java implementation, but it gives some of the basic components and object abstractions required, such as contracts, accounts, and products.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/2.jpeg&quot; alt=&quot;C2P java class dagram&quot; /&gt;
-    &lt;figcaption&gt;C2P java class dagram&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;This image shows the recursive relationship between products and contracts. A single product may be referenced my multiple contracts, and a single contact may reference multiple products. A contract must also also reference two accounts: The buyer/owner/giver and the seller/receiver. The process of querying the ledger and tracing back the history of a product to see what contarcts it has been used in, who are the participants of those contracts, and what other products were involved in those contracts can be seen here.&lt;/p&gt;
-
-&lt;p&gt;The sequence of events illusrated below shows how a permissioned account A&lt;sub&gt;m&lt;/sub&gt; creates 5 proucts, P&lt;sub&gt;0-4&lt;/sub&gt;, and then sends a contract C&lt;sub&gt;0&lt;/sub&gt; to A &lt;sub&gt;0&lt;/sub&gt; products. The double blue lines show how this contract (C&lt;sub&gt;0&lt;/sub&gt;) contains all 5 of all these original products. A&lt;sub&gt;0&lt;/sub&gt; then decides to keeps P&lt;sub&gt;0&lt;/sub&gt;, and sends another contract (C&lt;sub&gt;1&lt;/sub&gt;) to A &lt;sub&gt;1&lt;/sub&gt;, that contains the remaining 4 products P&lt;sub&gt;1-4&lt;/sub&gt;. 
-A&lt;sub&gt;1&lt;/sub&gt; then decides to keeps P&lt;sub&gt;1&lt;/sub&gt;, and sends another contract (C&lt;sub&gt;2&lt;/sub&gt;) to A &lt;sub&gt;2&lt;/sub&gt;, that contains the remaining 3 products P&lt;sub&gt;2-4&lt;/sub&gt;. 
-This sequential series of events continues with each subsequent contract containing 1 less product than the contract before until each account A&lt;sub&gt;0-5&lt;/sub&gt; owns a single product.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/3.jpg&quot; alt=&quot;C2P event ledger&quot; /&gt;
-    &lt;figcaption&gt;Tracing history on the event ledger &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;At this point, given any contract or product on the ledger we can see the history of all the contracts a given product was involved in, and in turn all the contracts each product was involved in. The sequence of events given in the example above was purposefully simplistic, but depending on the actual sequence of events recorded on the ledger, it may be possible to realise and form a complete picture of all events recorded on the ledger from any single starting point.&lt;/p&gt;
-
-&lt;p&gt;Having said this, for the purpose of privacy, there may be some authentication or security measure implemented to restrict access to particular parts such as accounts or unrelated contracts.&lt;/p&gt;
-
-&lt;p&gt;The C2P network is a framework that may be implemented and adapted in different ways and to suit different purposes or retail markets.
-My own implementation to demonstarte this idea, I have developed in Java and deployed on a Tomcat servlet container. The web interafce I write in Javascript, HTML5 and SAS/CSS. I didnt use any component frameworks, although I made heavy use of some popular libraries. The eventual idea behind the interface is to be able to create a user account, write contracts, create and send products, and query the ledger history.&lt;/p&gt;
-
-&lt;p&gt;The site isnt quite finished yet, and I havent found an ideal server to deplo it on either, so currently I just able to provide screenshots taken from my own computer.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/1.png&quot; alt=&quot;C2P login screen&quot; /&gt;
-    &lt;figcaption&gt;The login screen&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/6.png&quot; alt=&quot;C2P user dashboard&quot; /&gt;
-    &lt;figcaption&gt;The user dashboard&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/5.png&quot; alt=&quot;C2P contract write&quot; /&gt;
-    &lt;figcaption&gt;Writing a contract&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/8.png&quot; alt=&quot;CCP user profile&quot; /&gt;
-    &lt;figcaption&gt;Viewing another user profile&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/4.png&quot; alt=&quot;C2P contract view&quot; /&gt;
-    &lt;figcaption&gt;Viewing contract details&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ccp/7.png&quot; alt=&quot;C2P product view&quot; /&gt;
-    &lt;figcaption&gt;Viewin product details&lt;/figcaption&gt;
-&lt;/figure&gt;
-</description>
-        <pubDate>Sun, 23 Jun 2019 00:00:00 +0100</pubDate>
-        
-        <link>/posts/2019-06-23/ccp.html</link>
-          
-        
-            <category>c2p programming blockchain</category>
         
           
         

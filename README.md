@@ -8,4 +8,4 @@
 1. Edit the `_posts` folder (in .md format)
 2. Run `bundle exec jekyll build`
 3. Commit
-4. Push to $ORIGIN
+4. Push to origin sources
