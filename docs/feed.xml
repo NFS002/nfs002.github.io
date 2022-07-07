@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Jul 2022 12:18:10 +0100</pubDate>
-    <lastBuildDate>Thu, 07 Jul 2022 12:18:10 +0100</lastBuildDate>
+    <pubDate>Thu, 07 Jul 2022 13:09:44 +0100</pubDate>
+    <lastBuildDate>Thu, 07 Jul 2022 13:09:44 +0100</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
     
@@ -266,12 +266,12 @@ and then email the host via gallery to check if they can come for a viewing.&lt;
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://github.com/gobuffalo/pop&quot;&gt;pop: sort-of-orm database tool for gobuffalo&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;https://github.com/gobuffalo/plush&quot;&gt;plush: html/golang temlplates for gobuffalo&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.heroku.com/platform&quot;&gt;Heroku PaaS&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.heroku.com/platform&quot;&gt;Heroku PaaS&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;In addition, ### A containerised &lt;strong&gt;MVP&lt;/strong&gt; is deployed on heroku &lt;a href=&quot;https://heroku-gallery-development.herokuapp.com/exhibitions/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In addition, A containerised &lt;strong&gt;MVP&lt;/strong&gt; is deployed on heroku &lt;a href=&quot;https://heroku-gallery-development.herokuapp.com&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 20 Apr 2020 00:00:00 +0100</pubDate>
         
