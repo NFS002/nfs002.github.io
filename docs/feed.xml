@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 13 Jul 2022 13:37:02 +0100</pubDate>
-    <lastBuildDate>Wed, 13 Jul 2022 13:37:02 +0100</lastBuildDate>
+    <pubDate>Wed, 13 Jul 2022 13:45:34 +0100</pubDate>
+    <lastBuildDate>Wed, 13 Jul 2022 13:45:34 +0100</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
     
@@ -15,7 +15,7 @@
         <description>&lt;h3 id=&quot;an-interactive-data-visualisation-of-a-neural-network&quot;&gt;An interactive data visualisation of a neural network&lt;/h3&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
-    &lt;iframe height=&quot;500&quot; width=&quot;900&quot; style=&quot;border:none&quot; src=&quot;/nnviz/index.html&quot;&gt;
+    &lt;iframe height=&quot;900&quot; width=&quot;1100&quot; style=&quot;border:none&quot; src=&quot;/nnviz/index.html&quot;&gt;
     &lt;/iframe&gt;
 &lt;/div&gt;
 
