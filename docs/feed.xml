@@ -5,14 +5,14 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 09 Jan 2023 13:19:18 +0000</pubDate>
-    <lastBuildDate>Mon, 09 Jan 2023 13:19:18 +0000</lastBuildDate>
+    <pubDate>Mon, 09 Jan 2023 14:15:11 +0000</pubDate>
+    <lastBuildDate>Mon, 09 Jan 2023 14:15:11 +0000</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
     
     <item>
         <title>An interactive neural network visualisation</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/kefei/logo.png&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/images/kefei/logo.jpg&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;-kefei-&quot;&gt;💙 Kefei 💙&lt;/h1&gt;
 &lt;h2 id=&quot;persistent-variables-in-kotlin&quot;&gt;Persistent Variables in Kotlin&lt;/h2&gt;
@@ -101,6 +101,8 @@ but if you were to pass an object ideniifier as described above, the path would 
 &lt;/ul&gt;
 
 &lt;p&gt;Written all in typescript, and open-sourced &lt;a href=&quot;https://github.com/NFS002/nnviz&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;all-credit-goes-to-tensorflow---i-was-simply-repurposing-their-work&quot;&gt;All credit goes to &lt;a href=&quot;https://playground.tensorflow.org/&quot;&gt;Tensorflow&lt;/a&gt; - I was simply repurposing their work.&lt;/h2&gt;
 </description>
         <pubDate>Wed, 13 Jul 2022 00:00:00 +0100</pubDate>
         
