@@ -1,0 +1,194 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Skydesign.blue</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="neural-networks dataviz programming">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An interactive neural network visualisation">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2023-01-09/kefei.html">
+<meta property="og:site_name" content="Skydesign.blue">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://www.skydesign.blue/posts/2023-01-09/kefei.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1RVjJO0cEN8VHMh39ZWmt-phm_hZYSQI5/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/057368162" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    An interactive neural network visualisation
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <p><img src="/images/kefei/logo.png" /></p>
+
+<h1 id="-kefei-">💙 Kefei 💙</h1>
+<h2 id="persistent-variables-in-kotlin">Persistent Variables in Kotlin</h2>
+
+<p>Ive always thought databases were a total painn to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
+Pretty much every server/api/application I have ever worked on that had a genuine use case needed to persist data of some sort and had a database integration, although in many of these cases, the data being persisted could of easily been stored in a local data structure.</p>
+
+<p>That is in brief my reason for creating Kefei, which is essentially an alternative to remote databases and one of its goals is to be simple and easy to setup and configure. Kefei automatically persists and loads your local application data structures. It can support multiple different adaptors but out of the box it persists data structures by writing them to the local file system.</p>
+
+<p>Kefei is written in Kotlin, so to use Kefei, youll have to be using Kotlin as well. However, getting started is pretty simple.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">MyClass</span><span class="o">:</span> <span class="nc">Persistable</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nd">@Persist</span>
+    <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">myImportantList:</span> <span class="nc">MutableList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="cm">/* The value of this field is persisted */</span>
+
+    <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">notImportantStr:</span> <span class="nc">String</span> <span class="cm">/* The value of this field is not persistedm its just a regular class property */</span>
+
+    <span class="nd">@Persist</span>
+    <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">myImportantStr:</span> <span class="nc">String</span> <span class="cm">/* The value of this field is persisted */</span>
+    
+    <span class="cm">/* Whatever else you want... */</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>As you can see from the code snippet below, in order to start persisting your local variables, the class containing the field which you want to persist must extend from the abstract base class Persistable, and then the field itself must be marked with the annotation @Persist. Only if both these conditions are true, Kefei will
+    - Register a JVM shutdown hook that serializes these field values and persists them,.
+        * Serialization format and perisent storage medium can be configured
+    - Automatically load these values from storage next time the same class in instantiated.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The `save()` and `load()` functions can be called at any time, but automatically they are called when the JVM shuts down and then when the same class is next instantiated. 
+</code></pre></div></div>
+
+<p>You may be thinking at this point that this totally defeats the point of OOP if all objects instantiated from the same class have the same values in their properties. Well, I have two things to say to that:</p>
+<ol>
+  <li>
+    <p>Although the <code class="language-plaintext highlighter-rouge">save()</code> and <code class="language-plaintext highlighter-rouge">load()</code> functions are called automatically by the kefei framework, there is an options file where this can be overidden, so that these functions would have to be called manually, but this gives you the option to call these functions on the object which you want to save and load values from, and pass in the path to where these values should be loaded from.</p>
+  </li>
+  <li>
+    <p>When you instantiate a class that extends from the abstract base class Persistable, you can pass in a constructor paramater, such as an object identifier or UUID so that the path where the values for this object will be saved will derived from this value. For example, usually the path were object value will be saved is:
+` ./${options.dir}/${class.name}/${field.class.name}/${field.name} `
+but if you were to pass an object ideniifier as described above, the path would now become:
+` ./${options.dir}/${class.name}/${object.identifier}/${field.class.name}/${field.name} `</p>
+  </li>
+</ol>
+
+<p>Ofcourse, youll have to remember this object identifier for when you next want to load these values.</p>
+
+<h3 id="i-will-admit-this-is-a-long-way-from-a-perfect-solution-but-i-do-believe-it-attempts-to-solve-a-genuine-problem-and-i-will-develop-it-further-when-i-get-the-chance-to-use-it-in-another-project">I will admit this is a long way from a perfect solution, but I do believe it attempts to solve a genuine problem, and I will develop it further when I get the chance to use it in another project.</h3>
+
+<p>You can find the source on Github <a href="https://github.com/NFS002/kefei">here</a>
+…aaand in case you were wondering, Kefei is my girlfriend, and this project is dedicated to her, I think she would appreciate it because she finds databases pretty annoyhing as well.</p>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#neural-networks dataviz programming">#neural-networks dataviz programming&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        July 13, 2022
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2023.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>

@@ -5,10 +5,82 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 13 Jul 2022 13:45:34 +0100</pubDate>
-    <lastBuildDate>Wed, 13 Jul 2022 13:45:34 +0100</lastBuildDate>
+    <pubDate>Mon, 09 Jan 2023 13:19:18 +0000</pubDate>
+    <lastBuildDate>Mon, 09 Jan 2023 13:19:18 +0000</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
       
+    
+    <item>
+        <title>An interactive neural network visualisation</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/images/kefei/logo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;-kefei-&quot;&gt;💙 Kefei 💙&lt;/h1&gt;
+&lt;h2 id=&quot;persistent-variables-in-kotlin&quot;&gt;Persistent Variables in Kotlin&lt;/h2&gt;
+
+&lt;p&gt;Ive always thought databases were a total painn to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
+Pretty much every server/api/application I have ever worked on that had a genuine use case needed to persist data of some sort and had a database integration, although in many of these cases, the data being persisted could of easily been stored in a local data structure.&lt;/p&gt;
+
+&lt;p&gt;That is in brief my reason for creating Kefei, which is essentially an alternative to remote databases and one of its goals is to be simple and easy to setup and configure. Kefei automatically persists and loads your local application data structures. It can support multiple different adaptors but out of the box it persists data structures by writing them to the local file system.&lt;/p&gt;
+
+&lt;p&gt;Kefei is written in Kotlin, so to use Kefei, youll have to be using Kotlin as well. However, getting started is pretty simple.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Persistable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Persist&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;myImportantList:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MutableList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is persisted */&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;notImportantStr:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is not persistedm its just a regular class property */&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Persist&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;myImportantStr:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is persisted */&lt;/span&gt;
+    
+    &lt;span class=&quot;cm&quot;&gt;/* Whatever else you want... */&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see from the code snippet below, in order to start persisting your local variables, the class containing the field which you want to persist must extend from the abstract base class Persistable, and then the field itself must be marked with the annotation @Persist. Only if both these conditions are true, Kefei will
+    - Register a JVM shutdown hook that serializes these field values and persists them,.
+        * Serialization format and perisent storage medium can be configured
+    - Automatically load these values from storage next time the same class in instantiated.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- The `save()` and `load()` functions can be called at any time, but automatically they are called when the JVM shuts down and then when the same class is next instantiated. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You may be thinking at this point that this totally defeats the point of OOP if all objects instantiated from the same class have the same values in their properties. Well, I have two things to say to that:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Although the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;save()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;load()&lt;/code&gt; functions are called automatically by the kefei framework, there is an options file where this can be overidden, so that these functions would have to be called manually, but this gives you the option to call these functions on the object which you want to save and load values from, and pass in the path to where these values should be loaded from.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When you instantiate a class that extends from the abstract base class Persistable, you can pass in a constructor paramater, such as an object identifier or UUID so that the path where the values for this object will be saved will derived from this value. For example, usually the path were object value will be saved is:
+` ./${options.dir}/${class.name}/${field.class.name}/${field.name} `
+but if you were to pass an object ideniifier as described above, the path would now become:
+` ./${options.dir}/${class.name}/${object.identifier}/${field.class.name}/${field.name} `&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Ofcourse, youll have to remember this object identifier for when you next want to load these values.&lt;/p&gt;
+
+&lt;h3 id=&quot;i-will-admit-this-is-a-long-way-from-a-perfect-solution-but-i-do-believe-it-attempts-to-solve-a-genuine-problem-and-i-will-develop-it-further-when-i-get-the-chance-to-use-it-in-another-project&quot;&gt;I will admit this is a long way from a perfect solution, but I do believe it attempts to solve a genuine problem, and I will develop it further when I get the chance to use it in another project.&lt;/h3&gt;
+
+&lt;p&gt;You can find the source on Github &lt;a href=&quot;https://github.com/NFS002/kefei&quot;&gt;here&lt;/a&gt;
+…aaand in case you were wondering, Kefei is my girlfriend, and this project is dedicated to her, I think she would appreciate it because she finds databases pretty annoyhing as well.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <link>/posts/2023-01-09/kefei.html</link>
+          
+        
+            <category>neural-networks dataviz programming</category>
+        
+          
+        
+            <category>posts</category>
+        
+          
+      </item>
     
     <item>
         <title>An interactive neural network visualisation</title>
@@ -561,51 +633,6 @@ Its a desktop application written in Java 8 but with a few maven dependencies su
         <pubDate>Fri, 05 Jul 2019 00:00:00 +0100</pubDate>
         
         <link>/posts/2019-07-05/stb.html</link>
-          
-        
-            <category>programming</category>
-        
-          
-        
-            <category>posts</category>
-        
-          
-      </item>
-    
-    <item>
-        <title>PasseTonBillet</title>
-        <description>&lt;h3 id=&quot;httpspassetonbilletfr&quot;&gt;&lt;a href=&quot;https://PasseTonBillet.fr&quot;&gt;https://PasseTonBillet.fr&lt;/a&gt;&lt;/h3&gt;
-&lt;h4 id=&quot;a-platform-to-buy-and-sell-unused-train-tickets&quot;&gt;A platform to buy and sell unused train tickets&lt;/h4&gt;
-
-&lt;p&gt;PasseTonBillet is a small startup based in France that I worked for on a voluntary basis during my penultimate year at St. Andrews. I initially got involved as I personally knew the other developer in the team, although recenltly I have had to put this commitment on hold temporarily due to other projects and my internship at Fidessa starting soon.&lt;/p&gt;
-
-&lt;p&gt;PasseTonBillet.fr is a web based platform that allows users to buy and sell unwanted or unused train tickets. Currently, we support several different train providers such as Eurostar, Thalys, Prems, SNCF, and others. Users on the site can still sell tickets from other providers, but if the purchase is from one ot the supported providers, the original e-ticket (pdf) will be automatically emailed to the buyer on completion of the payment. 
-The payment is made directly to the seller, and currently we do not charge commission. However, we did recently introduce our first paid feature, a premium-rate phone call directly to the buyer, allowing you to secure your purchase instantly without having to message them first and potentially be outbid by others.&lt;/p&gt;
-
-&lt;p&gt;Theres not that many websites providing a similar service to PasseTonBillet. In the UK, reselling train tickets is strictly regulated, but it does depend on the type of ticket and whether you used an inermediary service ( such as trainline ) or not. Generally, reselling train tickets is illegal, as it contradicts the railways bye-laws  (2005) 21.1 to 21.4. as tickets are non-transferrable. It is also a further offence to buy one from an unauthorised source.&lt;/p&gt;
-
-&lt;p&gt;The exact laws can vary a lot depending on the country and provider, and for international trains it is very unclear. There are some useful blog posts on the subject &lt;a href=&quot;https://www.transfertravel.com/blog-posts/understanding-rail-cancellation-policies&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://www.transfertravel.com/blog-posts/can-i-sell-my-train-ticket&quot;&gt;here.&lt;/a&gt; In a lot of cases, you could always sell somone a pen and throw in the tickets for free…&lt;/p&gt;
-
-&lt;p&gt;The main issue we have faced so far when developing the platform is scammers. We get a lot of users selling expired, invalid or counterfeit tickets, and  often we find the same tickets listed on other sites as well. So, we have to put in to use several sophisticated security features and KYC authentication on sellers. This has proven to be pretty effective so far since customer reviews are generally positive and recently we have seen records of around 80 new user sign ups and 30 new tickets posted for sale a day. PasseTonBillet is implemented mainly in Laravel, Vue, and PostgreSQL.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ptb/1.png&quot; alt=&quot;PasseTonBillet home page&quot; /&gt;
-    &lt;figcaption&gt;The home page&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ptb/2.png&quot; alt=&quot;PasseTonBillet recent tickets&quot; /&gt;
-    &lt;figcaption&gt;Recent tickets&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/images/ptb/3.png&quot; alt=&quot;PasseTonBillet user reviews&quot; /&gt;
-    &lt;figcaption&gt;User reviews&lt;/figcaption&gt;
-&lt;/figure&gt;
-</description>
-        <pubDate>Thu, 27 Jun 2019 00:00:00 +0100</pubDate>
-        
-        <link>/posts/2019-06-27/ptb.html</link>
           
         
             <category>programming</category>
