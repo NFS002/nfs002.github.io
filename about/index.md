@@ -3,6 +3,9 @@ layout: post
 title: About
 ---
 <p>
+
+*Written in March 2020*
+
 I am a student in my final year of an undergraduate degree studying computer dcience at St. Andrews university, and I created this website to have a platform to blog and talk about subjects and other topics that interest me.
 I have a long standing interest in financial services and investment strategy and I loke to experiment with demo account and small stakes exploring new features on different trading platforms using technical anaylsis and quantative modelling. Id be very keen to consider a graduate role developing machine learning, multimedia processing, and other froms and big data analytics as a form of investment strategy, and Ive found some of the ways in which this has happened to be exiciting and innovative. 
 <br><br>

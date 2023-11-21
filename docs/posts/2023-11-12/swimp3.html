@@ -8,7 +8,7 @@
     <meta charset="utf-8">
 <title>Projects &#8211; Skydesign.blue</title>
 <meta name="description" content="Personal blog etc ...">
-
+<meta name="keywords" content="spotify api python programming">
 
 
 
@@ -18,9 +18,9 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About">
+<meta property="og:title" content="Swimp3">
 <meta property="og:description" content="Personal blog etc ...">
-<meta property="og:url" content="https://www.skydesign.blue/about/">
+<meta property="og:url" content="https://www.skydesign.blue/posts/2023-11-12/swimp3.html">
 <meta property="og:site_name" content="Skydesign.blue">
 
 
@@ -38,7 +38,7 @@
   gtag('config', 'UA-142990170-1');
 </script>
 
-<link rel="canonical" href="https://www.skydesign.blue/about/">
+<link rel="canonical" href="https://www.skydesign.blue/posts/2023-11-12/swimp3.html">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Skydesign.blue Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -93,21 +93,25 @@
                     
                     <!-- MAIN -->
                     <h1 class="entry-title">
-                    About
+                    Swimp3
                     </h1>
                         
                     <!-- POST CONTENT -->
                     <div class="entry-content">
-                        <p>
+                        <h1 id="swimp3">Swimp3</h1>
 
-*Written in March 2020*
+<p>This mini-project is so simple in fact it hardly deserves its own post, but its a bit of programming I did partly for fun and partly to solve a practical problem I faced in my daily life so in that sense it seems fair enough to write at least a little bit about it.</p>
 
-I am a student in my final year of an undergraduate degree studying computer dcience at St. Andrews university, and I created this website to have a platform to blog and talk about subjects and other topics that interest me.
-I have a long standing interest in financial services and investment strategy and I loke to experiment with demo account and small stakes exploring new features on different trading platforms using technical anaylsis and quantative modelling. Id be very keen to consider a graduate role developing machine learning, multimedia processing, and other froms and big data analytics as a form of investment strategy, and Ive found some of the ways in which this has happened to be exiciting and innovative. 
-<br><br>
-I followed closely the ICO boom and huge growth in crytocurrencies and ditributed ledger technologies in 2017,
-and look out for news updates from various channels and sources. In general, I am always interested in hearing about and understanding new technologies, and the opportunities and possibilities they present. I really enjoy my degree and the different modules and classes I have the opportunity to take, and programming assignments in particular.
+<p>Swimp3 is a simple CLI program written in python that can either create a new randomly generated spotify playlist (given a larger ‘seed’ playlist to make a subselection from), and then download that playlust, or just directly download the given playlist to a collection of mp3 files.</p>
 
+<p>Im using a third party library <a href="https://github.com/spotDL/spotify-downloader">(spotdl)</a> to interact with the spotify API so this is really not a big deal. I use it because I go swimming quite a lot (much less in the winter) and I have some underwater headphones to listen to music or podcasts while I swim, which really does give me a lot of motivation and make the whole experience more enjoyable.</p>
+
+<p>The basic usage is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Swimp3 [-h] --playlist-id PLAYLIST_ID [--seed] [--path PATH] [--length LENGTH]
+</code></pre></div></div>
+
+<p>As always, the project is <a href="https://github.com/nfs002/swimp3">opensourced and available on my GitHub</a></p>
 
                     </div>  
 
@@ -118,6 +122,8 @@ and look out for news updates from various channels and sources. In general, I a
                     <div class="inline-tags">
                         <span>
                             
+                                <a href="/tags/#spotify api python programming">#spotify api python programming&nbsp;&nbsp;&nbsp;</a>
+                            
                         </span>
                     </div>
                 
@@ -125,7 +131,7 @@ and look out for news updates from various channels and sources. In general, I a
                     
                     <!-- POST DATE -->
                     <div class="post-date">
-                        
+                        12th November 2023
                     </div>
                 </article>
             </div>

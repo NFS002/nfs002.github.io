@@ -5,19 +5,50 @@
     <description>Personal blog etc ...</description>
     <link>https://www.skydesign.blue/</link>
     <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 09 Jan 2023 14:22:57 +0000</pubDate>
-    <lastBuildDate>Mon, 09 Jan 2023 14:22:57 +0000</lastBuildDate>
-    <generator>Jekyll v3.9.1</generator>
+    <pubDate>Tue, 21 Nov 2023 00:32:33 +0000</pubDate>
+    <lastBuildDate>Tue, 21 Nov 2023 00:32:33 +0000</lastBuildDate>
+    <generator>Jekyll v3.9.3</generator>
       
     
     <item>
-        <title>An interactive neural network visualisation</title>
+        <title>Swimp3</title>
+        <description>&lt;h1 id=&quot;swimp3&quot;&gt;Swimp3&lt;/h1&gt;
+
+&lt;p&gt;This mini-project is so simple in fact it hardly deserves its own post, but its a bit of programming I did partly for fun and partly to solve a practical problem I faced in my daily life so in that sense it seems fair enough to write at least a little bit about it.&lt;/p&gt;
+
+&lt;p&gt;Swimp3 is a simple CLI program written in python that can either create a new randomly generated spotify playlist (given a larger ‘seed’ playlist to make a subselection from), and then download that playlust, or just directly download the given playlist to a collection of mp3 files.&lt;/p&gt;
+
+&lt;p&gt;Im using a third party library &lt;a href=&quot;https://github.com/spotDL/spotify-downloader&quot;&gt;(spotdl)&lt;/a&gt; to interact with the spotify API so this is really not a big deal. I use it because I go swimming quite a lot (much less in the winter) and I have some underwater headphones to listen to music or podcasts while I swim, which really does give me a lot of motivation and make the whole experience more enjoyable.&lt;/p&gt;
+
+&lt;p&gt;The basic usage is:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Swimp3 [-h] --playlist-id PLAYLIST_ID [--seed] [--path PATH] [--length LENGTH]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As always, the project is &lt;a href=&quot;https://github.com/nfs002/swimp3&quot;&gt;opensourced and available on my GitHub&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
+        
+        <link>/posts/2023-11-12/swimp3.html</link>
+          
+        
+            <category>spotify api python programming</category>
+        
+          
+        
+            <category>posts</category>
+        
+          
+      </item>
+    
+    <item>
+        <title>Kefei</title>
         <description>&lt;p&gt;&lt;img src=&quot;/images/kefei/logo.jpg&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;-kefei-&quot;&gt;💙 Kefei 💙&lt;/h1&gt;
 &lt;h2 id=&quot;persistent-variables-in-kotlin&quot;&gt;Persistent Variables in Kotlin&lt;/h2&gt;
 
-&lt;p&gt;Ive always thought databases were a total painn to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
+&lt;p&gt;Ive always thought databases were a total pain to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
 Pretty much every server/api/application I have ever worked on that had a genuine use case needed to persist data of some sort and had a database integration, although in many of these cases, the data being persisted could of easily been stored in a local data structure.&lt;/p&gt;
 
 &lt;p&gt;That is in brief my reason for creating Kefei, which is essentially an alternative to remote databases and one of its goals is to be simple and easy to setup and configure. Kefei automatically persists and loads your local application data structures. It can support multiple different adaptors but out of the box it persists data structures by writing them to the local file system.&lt;/p&gt;
@@ -66,14 +97,14 @@ but if you were to pass an object ideniifier as described above, the path would 
 &lt;h3 id=&quot;i-will-admit-this-is-a-long-way-from-a-perfect-solution-but-i-do-believe-it-attempts-to-solve-a-genuine-problem-and-i-will-develop-it-further-when-i-get-the-chance-to-use-it-in-another-project&quot;&gt;I will admit this is a long way from a perfect solution, but I do believe it attempts to solve a genuine problem, and I will develop it further when I get the chance to use it in another project.&lt;/h3&gt;
 
 &lt;p&gt;You can find the source on Github &lt;a href=&quot;https://github.com/NFS002/kefei&quot;&gt;here&lt;/a&gt;
-…aaand in case you were wondering, Kefei is my girlfriend, and this project is dedicated to her, I think she would appreciate it because she finds databases pretty annoyhing as well.&lt;/p&gt;
+…aaand in case you were wondering, Kefei &lt;del&gt;is&lt;/del&gt; was my girlfriend, and this project is dedicated to her, I think she would appreciate it because she finds databases pretty annoying as well.&lt;/p&gt;
 </description>
         <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
         
         <link>/posts/2023-01-09/kefei.html</link>
           
         
-            <category>neural-networks dataviz programming</category>
+            <category>kotlin databases programming</category>
         
           
         
@@ -584,60 +615,6 @@ As specifications go, it was about as vague as it gets, but the words ‘middlew
           
         
             <category>programming software design</category>
-        
-          
-        
-            <category>posts</category>
-        
-          
-      </item>
-    
-    <item>
-        <title>SimpleTradingBot</title>
-        <description>&lt;p&gt;&lt;img width=&quot;300&quot; src=&quot;/images/stb/1.jpeg&quot; /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;another-binance-trading-bot&quot;&gt;Another Binance trading bot&lt;/h2&gt;
-
-&lt;p&gt;Im generally quite involved in trading and investment strategy and I like to experiment with demo account and small stakes exploring new features on different trading platforms using technical anaylsis and quantative modelling. I first heard about bitcoin back in 2012, and Ive had a ago at trading it and some the other bigger cryptos a few times. I also followed closely the ICO boom and huge growth in crytocurrencies and ditributed ledger technologies in 2017,and look out for news updates from various channels and sources.
-&lt;br /&gt;
-I wanted to try an automated style of trading, i.e trades executed programmatically by a computer program (or ‘bot’) based on pre-determined rules and algorithms. Any bot is gonna need an exchange that maintains a reliable and complete API. The &lt;a href=&quot;https://www.binance.com/en&quot;&gt; Binance &lt;/a&gt; exhange is well suited. Their API is well documented and fairly easy to use. In 2016, they held a competition inviting programmers to write their own wrapper for the API in any programming language. The best wrapper for each language would become officially supported by Binance and the creator would win 1,000 BNB. The outcome of this is that now Java, as well as 8 other languages, all have open source clients which work pretty well. There is some information about the competion &lt;a href=&quot;https://www.binance.com/en/support/articles/115002604631-Winners-of-Binance-API-Competition&quot;&gt; here. &lt;/a&gt; The fact that Binance happens to be one of the biggest cryptocurrency trading exchanges, and at the time of wrting, supports over 500 currency pairs, and has a daily volume of $1,730,209,635 is obviously a huge bonus.&lt;/p&gt;
-
-&lt;p&gt;There a lot of trading bots already out there on the market. Pretty much all of them support the binance exchange and usually some other exchanges as well. Some bots, like &lt;a href=&quot;https://margin.de/&quot;&gt;Margin &lt;/a&gt; ( formerly LeoNardo ) claim to support 20 different exchanges and as a fully fledged desktop application packed for various platforms and an impressive and interactive GUI. &lt;a href=&quot;https://gekko.wizb.it/&quot;&gt;  The Gekko &lt;/a&gt; bot is open source and pretty well respected. Theres many more as well, offering different features. Some are open source and free to use whilst others you have to purchase. Some, like &lt;a href=&quot;https://www.cryptohopper.com/&quot;&gt; Cryptohopper &lt;/a&gt; are hosted on a remote server and provide a web platform for users, which is potentially advantageous, but not ideal.&lt;/p&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img width=&quot;300&quot; src=&quot;/images/photo-grid/margin.png&quot; alt=&quot;The Margin (LeoNardo) bot&quot; /&gt;
-    &lt;figcaption&gt;The Margin (LeoNardo) bot&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img width=&quot;300&quot; src=&quot;/images/stb/3.png&quot; alt=&quot;The Gekko bot&quot; /&gt;
-    &lt;figcaption&gt;The Gekko bot&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure style=&quot;text-align:center&quot;&gt;
-    &lt;img width=&quot;300&quot; src=&quot;/images/stb/2.png&quot; alt=&quot;Haasbot&quot; /&gt;
-    &lt;figcaption&gt;Haasbot - another popular choice&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Ive had a pretty quick go with all these bots, and a few more that Ive played with as well. Usually, the open source ones do have bugs. When I tried Gekko in 2018, it was too buggy to use for real trading, but this might have changed now. The fact that they’re open source is very useful as it allows you to personally examine the source code and customise it however you like, but taking a big program like these ones and understanding the code line for line is pretty time consuming and fiddly process. Ive found the paid options can also have a few bugs, and now your reliant on someone else to fix it, which could take too long, or never even happen. You can also never really be sure that the program is executing as it should and the trades you make are what they say they are. Unfortunately, trading is gambling, and the concept of a trading bot is fairly experimental and so its always a bit of a risk to pay for it when you can never be certain of making the price back. Its even worse when they wont let you try the bot before you buy it. 
-Ive never bought a bot, but some of them, such as &lt;a href=&quot;https://margin.de/&quot;&gt; Margin &lt;/a&gt; and &lt;a href=&quot;https://www.cryptohopper.com/&quot;&gt; Cryptohopper &lt;/a&gt;offer a free trial/demo version. 
-&lt;br /&gt;
-In the end I decided to write my own, with a client provided by the &lt;a href=&quot;https://github.com/binance-exchange/binance-java-api&quot;&gt;Java winner of the competion&lt;/a&gt;, João Silva. When you write your own, it is free, and you can personally responsible and aware of bugs, as well as implementing any feature you personally would like and you can be sure to really understand how it works also. I called my project Simple Trading Bot. I started it over a year ago, and then abandoned it when I realised that it was actually pretty difficult and fiddly to get this working smoothly and predictably, and theres alot of variables to consider other than just the exchange and the client. It was pretty unlikely to be profitable. Recently, I rewrote the whole thing and decided to have another go, this time paying more attention to code in the litte details and eventualities that really complicates the whole process.  Hopefully its still simple enough to justify its name.  Im at the stage now where Ive implemented most (~85%) of the necessary functionality and everyting seems to be going well, but Ill carry on testing before I deploy it live.&lt;/p&gt;
-
-&lt;p&gt;I havent written a GUI because I log everything extensively to dedicated log files, and I can filter and search them efficiently with &lt;a href=&quot;https://logmx.com/&quot;&gt; another program called LogMX. &lt;/a&gt; 
-Its a desktop application written in Java 8 but with a few maven dependencies such as Spring, Guava, Ta4j, and the Binance client.
-&lt;br /&gt;
-&lt;a href=&quot;https://github.com/NFS002/SimpleTradingBot&quot;&gt;Ive open sourced the project here.&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;edit-18042020&quot;&gt;Edit 18/04/2020&lt;/h2&gt;
-
-&lt;p&gt;Ive been working on this project on and off for a few years now, and I still work on this project whenever I get time. I would like to say that I finished an initial implementation for comprehesive live order management (on the binance exchange only), which includes mechanisms to open, update and monitor, as well as close, live orders. Ive also implemented a bunch of backtesting features for free EOD datasets off &lt;a href=&quot;https://www.quandl.com/data/EOD-End-of-Day-US-Stock-Prices&quot;&gt;Quandl.&lt;/a&gt; As far as an actual strategy goes…&lt;/p&gt;
-</description>
-        <pubDate>Fri, 05 Jul 2019 00:00:00 +0100</pubDate>
-        
-        <link>/posts/2019-07-05/stb.html</link>
-          
-        
-            <category>programming</category>
         
           
         
