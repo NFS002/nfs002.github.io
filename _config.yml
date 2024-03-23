@@ -1,4 +1,4 @@
-title:            Skydesign.blue
+title:            Get to know the real me
 description:      Personal blog etc ...
        
 
@@ -6,7 +6,7 @@ future:      false  # publish future dated posts --  true, false (default)
 highlighter: rouge
 baseurl: ''
 destination: docs/
-url: "https://www.skydesign.blue"
+url: "https://nfs002.github.io"
 markdown:    kramdown
 plugins:
   - jekyll-sitemap
