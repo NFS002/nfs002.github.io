@@ -42,6 +42,7 @@ exclude:
   - .bundle
   - .jekyll-assets-cache
   - .sass-cache
+  - vendor
   - CHANGELOG
   - Capfile
   - Gemfile

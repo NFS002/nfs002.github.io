@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Skydesign.blue</title>
+    <title>Get to know the real me</title>
     <description>Personal blog etc ...</description>
-    <link>https://www.skydesign.blue/</link>
-    <atom:link href="nathanrooy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Nov 2023 00:43:28 +0000</pubDate>
-    <lastBuildDate>Tue, 21 Nov 2023 00:43:28 +0000</lastBuildDate>
+    <link>https://nfs002.github.io/</link>
+    <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 23 Mar 2024 23:34:33 +0000</pubDate>
+    <lastBuildDate>Sat, 23 Mar 2024 23:34:33 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
       
     
@@ -233,7 +233,7 @@ and what documents are required.&lt;/p&gt;
 
 &lt;p&gt;As I mentioned above, the registration protocol actually takes place with the client interfacing with a sequence of &lt;em&gt;n&lt;/em&gt;  registration servers (where n &amp;gt;= 3). 
 &lt;strong&gt;Lets call these three registration servers&lt;/strong&gt;
-$RS_1 RS_2, RS_3$&lt;/p&gt;
+$RS_1,RS_2, RS_3$&lt;/p&gt;
 
 &lt;h4 id=&quot;the-registration-protocol-sequence&quot;&gt;The registration protocol sequence&lt;/h4&gt;
 
@@ -551,7 +551,7 @@ General usage:
 
 &lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
 
-&lt;p&gt;Ok so E-Voting is not a new idea, at all. Apparently 7 US states used some sort of automation even way back in the 1964 presedential election. Today, its actually used in various forms across the world, and some countries even use it for national and parliamentary elections. However, totally reliable and secure electronic voting seems like a bit of holy grail. I think most people are in agreement that it would be a positive development to the electoral systems themselves, but similarly every computer scientist and security researcher has warned against the sheer impossibility of guaranteeing against all possible security flaws and vulnerabilities. I guess that doesnt necessarilly mean its never gonna see wide adoption, but I tend to think that if a new technology is gonna be a hit, its gotta happen fairly quickly after its release. It might be similar to being accused of a crime you didnt commit, once the doubt sets in, its pretty hard to get rid of. And the more serious the crime (or the higher the stakes in the election), it becomes almost impossible to resolve all the residual uncertainty, and in case you were wondering, pairing e-voting with manual voting and giving voters the choice doesnt solve much either. Theres a bunch of different types of e-voting, but one of the main distinctions is the hardware (dedicated device vs computer/web-based), and each has its advantages. Interestingly, some secrity experts claim the problem is not with e-voting, but the inherent unpredictability of computational systems themselves. To be honest, that seems completely ridiculous to me, sure computers can crash randomly or have some untraceable bug, but so can humans ? And the latter actually seems a lot more likely.&lt;/p&gt;
+&lt;p&gt;Ok so E-Voting is not a new idea, at all. Apparently at least 7 US states used some sort of automation even way back in the 1964 presedential election. Today, its actually used in various forms across the world, and some countries even use it for national and parliamentary elections. However, totally reliable and secure electronic voting seems like a bit of holy grail. I think most people are in agreement that it would be a positive development to the electoral systems themselves, but similarly every computer scientist and security researcher has warned against the sheer impossibility of guaranteeing against all possible security flaws and vulnerabilities. I guess that doesnt necessarilly mean its never gonna see wide adoption, but I tend to think that if a new technology is gonna be a hit, its gotta happen fairly quickly after its release. It might be similar to being accused of a crime you didnt commit, once the doubt sets in, its pretty hard to get rid of. And the more serious the crime (or the higher the stakes in the election), it becomes almost impossible to resolve all the residual uncertainty, and in case you were wondering, pairing e-voting with manual voting and giving voters the choice doesnt solve much either. Theres a bunch of different types of e-voting, but one of the main distinctions is the hardware (dedicated device vs computer/web-based), and each has its advantages. Interestingly, some secrity experts claim the problem is not with e-voting, but the inherent unpredictability of computational systems themselves. To be honest, that seems completely ridiculous to me, sure computers can crash randomly or have some untraceable bug, but so can humans ? And the latter actually seems a lot more likely.&lt;/p&gt;
 
 &lt;p&gt;I dont doubt that security experts have found security problems in every attempt at online voting, and yes some of these problems simply dont exist in the manual system, but on the whole im not convinced that the traditional system has less flaws.&lt;/p&gt;
 
