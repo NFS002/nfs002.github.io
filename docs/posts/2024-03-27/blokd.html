@@ -1,0 +1,160 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Get to know the real me</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="blockchain web3 kotlin programming">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blokd">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://nfs002.github.io/posts/2024-03-27/blokd.html">
+<meta property="og:site_name" content="Get to know the real me">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://nfs002.github.io/posts/2024-03-27/blokd.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Get to know the real me Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1hufBnodympoZKA1cv_OIWE5MnpOLCAga/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/nfs002/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    Blokd
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <figure>
+    <img width="200px" src="/images/blokd/logo.png" alt="Blokd logo" />
+</figure>
+
+<p>Blokd is a blockchain backed framework for managing private legal contracts, for example tenancy agreements, wills.
+The idea was to leverage some of the properties of the Blockchain data storage format such as immutability, zero-trust, and full visibility to ensure that Legal contracts are properly fulfilled and maintained by all parties and that there can be no dispute or disagreement about the contents or who has signed what, or what the state of the contract was when it was signed. I was reading about some cases of contract fraud that occurred either due to miscommunication between the client and solicitor or because a contract apparently was lost or they accidentally signed or presented an old or outdated copy.
+My solution was this Blockchain framework whereby contracts were stored on a Blockchain and anytime the contract was updated or signed, or a new contract was created, this would be stored on the same Blockchain also, in a subsequent block.
+So let’s say you have 10 people who are entering into a complex legal agreement whereby many different contracts are likely to be exchanged, they could provision their own private Blockchain instance between the 10 of them. When they initially set up they instance, each person would have to provide a private and pubic key they can use to receive and sign contracts. They can also choose the rules under which they would allow a block to be valid and added to the Blockchain. So for example, they may say that if person a creates a contract it must at least be signed by person b, c, and g, or persons c, d and f. Or they may just say that a Contract must be signed by person a and at least 70% of all other participants, regardless of who those people are. Signing rules could be time sensitive as well, so if a contract is not signed within a certain period of time, it will not be persisted on a block. This initial configuration of how many people are included in the network, their key pairs, and the signing rules, must be signed by everyone and this is in effect the first contract of the first block, but from then on, the signing rules set out in this configuration would apply. A rough diagram of the system architecture is pictured below:</p>
+
+<figure style="text-align:center">
+    <img src="/images/blokd/arch.png" alt="Blokd system architecture" />
+    <figcaption>System architecture</figcaption>
+</figure>
+
+<p>So in terms of the tech stack I used for this project, It can be divided into several components.
+The core Blockchain framework and each client node was 100% in Kotlin, packaged using cradle as a docker container, and using Apache Kafka to send contracts and communicate with other Nodes in the network. There was also a REST API and Web application to allow nodes to visualise the Blockchain, visually inspect each block, and of course read each proposed contact before signing, so the web application was essentially  a visual interface to interact with the system. The REST API was also written in Kotlin, using the ktor framework for routing, handlers, security and model serialisation. I wrote the web application in Vue.js 3 using the quasar framework with the composition API and pinia for state management. The links to the corresponding Github repositories are:</p>
+
+<ul>
+  <li><a href="https://github.com/NFS002/blokd-api">REST API and server</a></li>
+  <li><a href="https://github.com/NFS002/blokd-core">Core framework (client node)</a></li>
+</ul>
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#blockchain web3 kotlin programming">#blockchain web3 kotlin programming&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        27th March 2023
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2024.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>
