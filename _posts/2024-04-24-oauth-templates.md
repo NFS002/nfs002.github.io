@@ -33,7 +33,7 @@ Therefore, to both consolidate my own knowledge and provoide a useful starting p
         - Facebook
         - (Username, email) DB
 
-- All endpoints */api/(host|exhibition|host|user)* require JWT authentication 
+- All endpoints */api/(host\|exhibition\|artist\|user)* require JWT authentication 
 
 - Additionally, the GET /api/host endpoint requires a token with the `read:host` permission.
 

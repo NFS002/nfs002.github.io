@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://nfs002.github.io/</link>
     <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 25 Apr 2024 17:10:43 +0100</pubDate>
-    <lastBuildDate>Thu, 25 Apr 2024 17:10:43 +0100</lastBuildDate>
+    <pubDate>Thu, 25 Apr 2024 20:05:56 +0100</pubDate>
+    <lastBuildDate>Thu, 25 Apr 2024 20:05:56 +0100</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
       
     
@@ -47,16 +47,7 @@ OAuth 2.0 is widly regarded as one of the highest security standards, and the ma
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;All endpoints */api/(host&lt;/td&gt;
-          &lt;td&gt;exhibition&lt;/td&gt;
-          &lt;td&gt;host&lt;/td&gt;
-          &lt;td&gt;user)* require JWT authentication&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
+    &lt;p&gt;All endpoints &lt;em&gt;/api/(host|exhibition|artist|user)&lt;/em&gt; require JWT authentication&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Additionally, the GET /api/host endpoint requires a token with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read:host&lt;/code&gt; permission.&lt;/li&gt;
 &lt;/ul&gt;
