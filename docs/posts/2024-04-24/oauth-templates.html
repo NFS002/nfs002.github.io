@@ -1,0 +1,249 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+   
+<head>
+    <meta charset="utf-8">
+<title>Projects &#8211; Get to know the real me</title>
+<meta name="description" content="Personal blog etc ...">
+<meta name="keywords" content="golang api auth programming">
+
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Auth templates">
+<meta property="og:description" content="Personal blog etc ...">
+<meta property="og:url" content="https://nfs002.github.io/posts/2024-04-24/oauth-templates.html">
+<meta property="og:site_name" content="Get to know the real me">
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142990170-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142990170-1');
+</script>
+
+<link rel="canonical" href="https://nfs002.github.io/posts/2024-04-24/oauth-templates.html">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Get to know the real me Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+
+
+</head>
+
+<!-- BODY -->
+<body>
+    
+    <!-- Social media icon bar -->
+
+<div class="icon-bar">
+  <a href="https://drive.google.com/file/d/1hufBnodympoZKA1cv_OIWE5MnpOLCAga/view?usp=sharing" class="pdf"><i class="fa fa-file-pdf-o"></i></a> 
+  <a href="https://www.github.com/nfs002" class="github"><i class="fa fa-github"></i></a> 
+  <a href="https://www.linkedin.com/in/nfs002/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="https://www.youtube.com/channel/UC-823hVnptyoQBm0B82YJ-A" class="youtube"><i class="fa fa-youtube"></i></a> 
+</div>
+    <div class="wrap">
+
+        <!-- Header -->
+        <div class="header">
+<span class="main-header-image">
+        <a href="/"><img src="/images/header/logo.png"></a> 
+</span>
+
+<!-- NAVIGATION -->
+<hr>
+<!--<span class="navigation-bar">
+    <a href="/about/">ABOUT</a>
+</span>-->
+</div>
+        
+        <div id="post-index">
+            <div id="main" role="main">
+                <article>
+                    
+                    <!-- MAIN -->
+                    <h1 class="entry-title">
+                    Auth templates
+                    </h1>
+                        
+                    <!-- POST CONTENT -->
+                    <div class="entry-content">
+                        <h2 id="simple-golang-auth-templates">Simple golang auth templates</h2>
+
+<p>This post is somehwat similar to the <a href="https://nfs002.github.io/posts/2023-01-09/kefei.html">kefei</a> post in that is was motivated by a very common developer process that I felt was unecessarilly complicated. However, in this case, that process was not a database connection, but protecting your API.</p>
+
+<h4 id="there-are-a-number-of-ways-you-might-choose-to-do-this-and-two-common-choices-for-which-i-have-written-application">There are a number of ways you might choose to do this, and two common choices, for which I have written application</h4>
+<h4 id="templates-for-are">templates for are:</h4>
+<h5 id="--oauth-20-template-v2">- Oauth 2.0 (<a href="">template-v2</a>)</h5>
+<h5 id="--simple-token-authentication-template-v1">- Simple Token authentication (<a href="">template-v1</a>)</h5>
+
+<h3 id="oauth-20"><a href="https://github.com/NFS002/go-template-v2">OAuth 2.0</a></h3>
+<p>OAuth 2.0 is in essence not an authorisation protocol, but actually a delegation protocol, that delegates authenticating a user with your service to another service (typically Facebook, Google, Twitter, Github).
+OAuth 2.0 is widly regarded as one of the highest security standards, and the main benefits from a user perspective is increased security, as you never have to create or share any credentials for or with the service you are trying to access.</p>
+
+<p>Previously, when I have wanted to set up OAuth2.0 on an app, it has been a fiddly process to say the least, and Im sure others had a similar experience. While OAuth 2.0 provides a strong foundation for secure authorization, the overall security of any system utilizing OAuth 2.0 depends on the implementation and the surrounding security measures.</p>
+
+<p>Therefore, to both consolidate my own knowledge and provoide a useful starting point to others, I have written this application template with the following features.</p>
+
+<ul>
+  <li>
+    <p>Simple REST API using the popular <a href="https://github.com/gin-gonic/gin">gin</a> framework for golang.</p>
+  </li>
+  <li>OAuth2.0 authentication provided by Auth0
+    <ul>
+      <li>Obviously this requires you to setup an account on Auth0, akthough I was able to setup a free one which allowed me to generate up to 1000 tokens a month,</li>
+      <li>Token providers:
+        <ul>
+          <li>Google</li>
+          <li>Apple</li>
+          <li>Facebook</li>
+          <li>(Username, email) DB</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>All endpoints */api/(host</td>
+          <td>exhibition</td>
+          <td>host</td>
+          <td>user)* require JWT authentication</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Additionally, the GET /api/host endpoint requires a token with the <code class="language-plaintext highlighter-rouge">read:host</code> permission.</li>
+</ul>
+
+<p><em>More information, including my particular Auth0 Account setup, is given in the <a href="https://github.com/nfs002/go-template-v2">repository README</a></em></p>
+
+<h3 id="simple-token-authentication"><a href="https://github.com/NFS002/go-template-v1">Simple token authentication</a></h3>
+
+<p>Another relatively simple golang API server application template:</p>
+
+<ul>
+  <li>An HTTP server using JSON over REST</li>
+  <li>API token authentication with scoped tokens</li>
+  <li>Each endpoint can be configured to require a given scope</li>
+  <li>A user can request a token with a given scope with their username/email and password
+    <ul>
+      <li>The token is only granted if the user’s scope encompasses the requested token scope</li>
+    </ul>
+  </li>
+  <li>Lazy expired token cleanup
+    <ul>
+      <li>When a request is sent using an expired token, the token is deleted from the database</li>
+    </ul>
+  </li>
+  <li>When the app starts, it looks for an environemnt variable <code class="language-plaintext highlighter-rouge">APP_ENV</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">$APP_ENV</code> must be set manually <em>before</em> running the app
+        <ul>
+          <li>e.g <code class="language-plaintext highlighter-rouge">APP_ENV=dev go run .</code></li>
+          <li>As opposed to other environment variables, which are loaded on app startup by <a href="https://github.com/joho/godotenv">godotenv</a></li>
+        </ul>
+      </li>
+      <li>If this is set, it attempts to load the environment variables in the file <code class="language-plaintext highlighter-rouge">.env.${APP_ENV}</code>
+        <ul>
+          <li>If file does not exist, it attempts to load the environment variables in the default file <code class="language-plaintext highlighter-rouge">.env</code></li>
+        </ul>
+      </li>
+      <li>If this is not set, it attempts to load the environment variables in the default file <code class="language-plaintext highlighter-rouge">.env</code></li>
+      <li>Connection to the db instance from the app is set via the <code class="language-plaintext highlighter-rouge">$POSTGRESQL_URL</code> environment variable</li>
+    </ul>
+  </li>
+  <li>Database migrtations managed by the <a href="https://github.com/golang-migrate/migrate">golang-migrate</a> module
+    <ul>
+      <li>All up migrations are run on startup if <code class="language-plaintext highlighter-rouge">RUN_MIGRAGTIONS=true</code></li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/rs/zerolog">Zerolog</a> for structured JSON logging</li>
+  <li>Tokens and users persisted in a postgresql database
+    <ul>
+      <li>Passwords are hashed and salted using bcrypt before persisting</li>
+      <li>Tokens are hashed using SHA-256 before persisting</li>
+    </ul>
+  </li>
+  <li>Request validation using the <a href="https://github.com/go-playground/validator">github.com/go-playground/validator/v10</a> module</li>
+  <li>Postgresql db intstance runs in a docker container
+    <ul>
+      <li>start with <code class="language-plaintext highlighter-rouge">docker-compose up</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>More information is given in the <a href="https://github.com/nfs002/go-template-v2">repository README</a></em></p>
+
+<h5 id="hopefully-at-least-one-of-these-templates-were-helpful-to-someone-but-if-not-they-were-still-fun-to-make-">Hopefully, at least one of these templates were helpful to someone, but if not, they were still fun to make :)</h5>
+
+
+                    </div>  
+
+                    <!--- DIVIDING LINE -->
+                    <hr>
+            
+                    <!-- POST TAGS -->
+                    <div class="inline-tags">
+                        <span>
+                            
+                                <a href="/tags/#golang api auth programming">#golang api auth programming&nbsp;&nbsp;&nbsp;</a>
+                            
+                        </span>
+                    </div>
+                
+                    <br>
+                    
+                    <!-- POST DATE -->
+                    <div class="post-date">
+                        25th April 2024
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+    
+<!-- FOOTER -->  
+<footer>  
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <span>
+    SKYDESIGN.BLUE &copy; 2024.<br>Powered by <a target="_blank" href="http://jekyllrb.com" rel="nofollow">Jekyll</a>
+</span>
+
+        </footer>
+    </div>   
+</footer>  
+</html>

@@ -5,10 +5,137 @@
     <description>Personal blog etc ...</description>
     <link>https://nfs002.github.io/</link>
     <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 27 Mar 2024 23:16:50 +0000</pubDate>
-    <lastBuildDate>Wed, 27 Mar 2024 23:16:50 +0000</lastBuildDate>
+    <pubDate>Thu, 25 Apr 2024 17:10:43 +0100</pubDate>
+    <lastBuildDate>Thu, 25 Apr 2024 17:10:43 +0100</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
       
+    
+    <item>
+        <title>Auth templates</title>
+        <description>&lt;h2 id=&quot;simple-golang-auth-templates&quot;&gt;Simple golang auth templates&lt;/h2&gt;
+
+&lt;p&gt;This post is somehwat similar to the &lt;a href=&quot;https://nfs002.github.io/posts/2023-01-09/kefei.html&quot;&gt;kefei&lt;/a&gt; post in that is was motivated by a very common developer process that I felt was unecessarilly complicated. However, in this case, that process was not a database connection, but protecting your API.&lt;/p&gt;
+
+&lt;h4 id=&quot;there-are-a-number-of-ways-you-might-choose-to-do-this-and-two-common-choices-for-which-i-have-written-application&quot;&gt;There are a number of ways you might choose to do this, and two common choices, for which I have written application&lt;/h4&gt;
+&lt;h4 id=&quot;templates-for-are&quot;&gt;templates for are:&lt;/h4&gt;
+&lt;h5 id=&quot;--oauth-20-template-v2&quot;&gt;- Oauth 2.0 (&lt;a href=&quot;&quot;&gt;template-v2&lt;/a&gt;)&lt;/h5&gt;
+&lt;h5 id=&quot;--simple-token-authentication-template-v1&quot;&gt;- Simple Token authentication (&lt;a href=&quot;&quot;&gt;template-v1&lt;/a&gt;)&lt;/h5&gt;
+
+&lt;h3 id=&quot;oauth-20&quot;&gt;&lt;a href=&quot;https://github.com/NFS002/go-template-v2&quot;&gt;OAuth 2.0&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;OAuth 2.0 is in essence not an authorisation protocol, but actually a delegation protocol, that delegates authenticating a user with your service to another service (typically Facebook, Google, Twitter, Github).
+OAuth 2.0 is widly regarded as one of the highest security standards, and the main benefits from a user perspective is increased security, as you never have to create or share any credentials for or with the service you are trying to access.&lt;/p&gt;
+
+&lt;p&gt;Previously, when I have wanted to set up OAuth2.0 on an app, it has been a fiddly process to say the least, and Im sure others had a similar experience. While OAuth 2.0 provides a strong foundation for secure authorization, the overall security of any system utilizing OAuth 2.0 depends on the implementation and the surrounding security measures.&lt;/p&gt;
+
+&lt;p&gt;Therefore, to both consolidate my own knowledge and provoide a useful starting point to others, I have written this application template with the following features.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Simple REST API using the popular &lt;a href=&quot;https://github.com/gin-gonic/gin&quot;&gt;gin&lt;/a&gt; framework for golang.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;OAuth2.0 authentication provided by Auth0
+    &lt;ul&gt;
+      &lt;li&gt;Obviously this requires you to setup an account on Auth0, akthough I was able to setup a free one which allowed me to generate up to 1000 tokens a month,&lt;/li&gt;
+      &lt;li&gt;Token providers:
+        &lt;ul&gt;
+          &lt;li&gt;Google&lt;/li&gt;
+          &lt;li&gt;Apple&lt;/li&gt;
+          &lt;li&gt;Facebook&lt;/li&gt;
+          &lt;li&gt;(Username, email) DB&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;All endpoints */api/(host&lt;/td&gt;
+          &lt;td&gt;exhibition&lt;/td&gt;
+          &lt;td&gt;host&lt;/td&gt;
+          &lt;td&gt;user)* require JWT authentication&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Additionally, the GET /api/host endpoint requires a token with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read:host&lt;/code&gt; permission.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;More information, including my particular Auth0 Account setup, is given in the &lt;a href=&quot;https://github.com/nfs002/go-template-v2&quot;&gt;repository README&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;simple-token-authentication&quot;&gt;&lt;a href=&quot;https://github.com/NFS002/go-template-v1&quot;&gt;Simple token authentication&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Another relatively simple golang API server application template:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;An HTTP server using JSON over REST&lt;/li&gt;
+  &lt;li&gt;API token authentication with scoped tokens&lt;/li&gt;
+  &lt;li&gt;Each endpoint can be configured to require a given scope&lt;/li&gt;
+  &lt;li&gt;A user can request a token with a given scope with their username/email and password
+    &lt;ul&gt;
+      &lt;li&gt;The token is only granted if the user’s scope encompasses the requested token scope&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Lazy expired token cleanup
+    &lt;ul&gt;
+      &lt;li&gt;When a request is sent using an expired token, the token is deleted from the database&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When the app starts, it looks for an environemnt variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APP_ENV&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$APP_ENV&lt;/code&gt; must be set manually &lt;em&gt;before&lt;/em&gt; running the app
+        &lt;ul&gt;
+          &lt;li&gt;e.g &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APP_ENV=dev go run .&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;As opposed to other environment variables, which are loaded on app startup by &lt;a href=&quot;https://github.com/joho/godotenv&quot;&gt;godotenv&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;If this is set, it attempts to load the environment variables in the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env.${APP_ENV}&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;If file does not exist, it attempts to load the environment variables in the default file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;If this is not set, it attempts to load the environment variables in the default file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.env&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Connection to the db instance from the app is set via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$POSTGRESQL_URL&lt;/code&gt; environment variable&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Database migrtations managed by the &lt;a href=&quot;https://github.com/golang-migrate/migrate&quot;&gt;golang-migrate&lt;/a&gt; module
+    &lt;ul&gt;
+      &lt;li&gt;All up migrations are run on startup if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RUN_MIGRAGTIONS=true&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rs/zerolog&quot;&gt;Zerolog&lt;/a&gt; for structured JSON logging&lt;/li&gt;
+  &lt;li&gt;Tokens and users persisted in a postgresql database
+    &lt;ul&gt;
+      &lt;li&gt;Passwords are hashed and salted using bcrypt before persisting&lt;/li&gt;
+      &lt;li&gt;Tokens are hashed using SHA-256 before persisting&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Request validation using the &lt;a href=&quot;https://github.com/go-playground/validator&quot;&gt;github.com/go-playground/validator/v10&lt;/a&gt; module&lt;/li&gt;
+  &lt;li&gt;Postgresql db intstance runs in a docker container
+    &lt;ul&gt;
+      &lt;li&gt;start with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;More information is given in the &lt;a href=&quot;https://github.com/nfs002/go-template-v2&quot;&gt;repository README&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;hopefully-at-least-one-of-these-templates-were-helpful-to-someone-but-if-not-they-were-still-fun-to-make-&quot;&gt;Hopefully, at least one of these templates were helpful to someone, but if not, they were still fun to make :)&lt;/h5&gt;
+
+</description>
+        <pubDate>Wed, 24 Apr 2024 00:00:00 +0100</pubDate>
+        
+        <link>/posts/2024-04-24/oauth-templates.html</link>
+          
+        
+            <category>golang api auth programming</category>
+        
+          
+        
+            <category>posts</category>
+        
+          
+      </item>
     
     <item>
         <title>Blokd</title>
@@ -574,42 +701,6 @@ General usage:
           
         
             <category>music cs programming</category>
-        
-          
-        
-            <category>posts</category>
-        
-          
-      </item>
-    
-    <item>
-        <title>A Secure electronic voting system</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/sevs/secure-voting.jpg&quot; alt=&quot;Secure electronic voting system&quot; width=&quot;300&quot; /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
-
-&lt;p&gt;Ok so E-Voting is not a new idea, at all. Apparently at least 7 US states used some sort of automation even way back in the 1964 presedential election. Today, its actually used in various forms across the world, and some countries even use it for national and parliamentary elections. However, totally reliable and secure electronic voting seems like a bit of holy grail. I think most people are in agreement that it would be a positive development to the electoral systems themselves, but similarly every computer scientist and security researcher has warned against the sheer impossibility of guaranteeing against all possible security flaws and vulnerabilities. I guess that doesnt necessarilly mean its never gonna see wide adoption, but I tend to think that if a new technology is gonna be a hit, its gotta happen fairly quickly after its release. It might be similar to being accused of a crime you didnt commit, once the doubt sets in, its pretty hard to get rid of. And the more serious the crime (or the higher the stakes in the election), it becomes almost impossible to resolve all the residual uncertainty, and in case you were wondering, pairing e-voting with manual voting and giving voters the choice doesnt solve much either. Theres a bunch of different types of e-voting, but one of the main distinctions is the hardware (dedicated device vs computer/web-based), and each has its advantages. Interestingly, some secrity experts claim the problem is not with e-voting, but the inherent unpredictability of computational systems themselves. To be honest, that seems completely ridiculous to me, sure computers can crash randomly or have some untraceable bug, but so can humans ? And the latter actually seems a lot more likely.&lt;/p&gt;
-
-&lt;p&gt;I dont doubt that security experts have found security problems in every attempt at online voting, and yes some of these problems simply dont exist in the manual system, but on the whole im not convinced that the traditional system has less flaws.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I think because a lot of people are gonna naturally cautious anyway about any e-voting system, whatever system is used has got to be really really good, and tick all the boxes. Traditional manual voting is definitely susceptible to vote manipulation, miscounting, and so many other security risks. But an e-voting system cant go near any of that stuff, Its gotta be anonymous,  accurate, private, tamper-proof, auditable, consistent, available, distributed, and a lot more. Oh, and its gotta do all this whilst also being simple and transparent, and &lt;em&gt;actually usable to the general public whilst also robust to the general public&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Given all that, I thought it would be fun to come up with my own system design and code my own implementation of an evoting system. 
-Im a big fan of keeping things simple, I think its pretty much always a positive attribute to have for several reasons. Having said that, looking back on the same great iventions over the past few hundred years, some of the best ones are extremely complex, which gives me a bit of hope that I didnt totally waste my time trying to create something totally pointless. Either way, I gave up on the complex version, and went back to basics. Now, its just a relatively simple client server system with strong hints of &lt;a href=&quot;https://en.wikipedia.org/wiki/ThreeBallot&quot;&gt;ThreeBallot&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The original implementation for this project was written in Java, and the source code is available from my &lt;a href=&quot;https://www.github.com/nfs002&quot;&gt;Github Page&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
-        
-        <link>/posts/2019-12-08/sevs.html</link>
-          
-        
-            <category>programming networks</category>
         
           
         
