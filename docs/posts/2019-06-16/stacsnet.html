@@ -20,7 +20,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stacsnet: an e-learning platform for St. Andrews computer science students">
 <meta property="og:description" content="Personal blog etc ...">
-<meta property="og:url" content="https://nfs002.github.io/posts/2019-06-16/stacsnet.html">
+<meta property="og:url" content="http://localhost:4000/posts/2019-06-16/stacsnet.html">
 <meta property="og:site_name" content="Get to know the real me">
 
 
@@ -38,7 +38,7 @@
   gtag('config', 'UA-142990170-1');
 </script>
 
-<link rel="canonical" href="https://nfs002.github.io/posts/2019-06-16/stacsnet.html">
+<link rel="canonical" href="http://localhost:4000/posts/2019-06-16/stacsnet.html">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Get to know the real me Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -102,25 +102,34 @@
 
 <p>The idea for this project came during my undergraduate degree in computer science at St. Andrews University. Stacsnet is a web platform for CS students with three main features:</p>
 <ul>
-  <li>View module content and lecture slides for previous years as well as the current year</li>
-  <li>See class averages, variation, marking trends, and grade boundaries for different modules over the years and submit your own grade.</li>
-  <li>Upload and share your own files (diagrams, lecture notes, exam scripts, etc ..)</li>
-  <li>Ask questions on a particular module or topic (either anonymously or with a username) either directly
-to another lecturer or student, or posted publicly on a message board.</li>
-  <li>Browse and contribute to previous conversation threads and reply to others posts with your own answers</li>
+  <li>
+    <p>View content (e.g lecture slides, graphics) for previous years as well as the current year for all available modules</p>
+  </li>
+  <li>See class averages, grade boundaries, variations, and marking trends, and grade boundaries for the selected modules over previous years.
+    <ul>
+      <li>The data servinh this feature is designed to be provided by submission from students, who would anonymously submit their grades for each module they took.</li>
+    </ul>
+  </li>
+  <li>Upload and share your own files (videos, diagrams, lecture notes, exam scripts, resources from other universities, etc… )</li>
+  <li>All personally uploaded additional resources are tagged with one more modules and topics.</li>
+  <li>All personally uploaded additional resources are available to all users of the site.</li>
+  <li>A message board, categorised by module and topic.
+    <ul>
+      <li>Users can browse and contribute to previous conversation threads and reply to others posts</li>
+      <li>Ask specific questions on a particular module/topic, optionally tagging another user</li>
+    </ul>
+  </li>
 </ul>
 
-<p>St. Andrews already has a private intranet called studres, where lecturers may upload lecture slides, examples, and other resources need to complete coursework assignments. Studres is OK, but it definetely has its limitations. Only staff may upload on to studres , and its content is generally limited and incomplete. Studres is private, only accessible to matriculated St. Andrews computer science students. However, because studres and lecture slides are often inadequate, most students also use lecture notes made publicly available
-from other universities. I definetely had some some favorite universities when it came to alternate educational resources, and would of found a platform such as this very useful at the time.</p>
+<p>St. Andrews already has a intranet called studres, where lecturers may upload lecture slides, examples, and other resources need to complete coursework assignments. Studres is OK, but it has its limitations. Only staff may upload on to studres, which generally happened at irregular intervals, and the content itself only contained the lecture slides themselves, which was generally limited and incomplete. Studres is also only accessible to matriculated St. Andrews computer science students. However, because the resources were often inadequate, many students also used lecture notes made publicly available from other universities. I definetely had some some favorite universities when it came to additional resources, and would of found a platform such as this very useful at the time.</p>
 
-<p>When I first created stacsnet, around a year before writing this post, it was slightly different from the version that is available now. Originally, stacsnet contained many of the features listed above, in addition to containing a synced copy of all files posted on studres. When i depolyed this version, I was aksed to take it down, or at least remove the lecture content, due it being copywrighted material. I thought this was odd since it was mostly just a copy of other universities, but I took it down anyway.</p>
+<p>When I first created stacsnet, around a year before writing the original post, it was slightly different from the version that is available now. Originally, stacsnet contained many of the features listed above, in addition to containing a synced copy of all files posted on studres. When i depolyed the original version, I was aksed to take it down, or at least remove the lecture content, due it being copywrighted material. I was surpried, since the lecture slides seemed mostly a copy of content other universities, but I took it down anyway.</p>
 
-<p>Even though the current version of stacsnet does not contain copy over any studres content, I have implemented some authentication features to prevent public access to the site. In order to use most of the features stacsnet, you must create an account, and to do this you need to prove you have acceess to a valid @st-andrews.ac.uk email address. An email address under the st-andrews domain is given to each student when they matriculate. 
-The authentication prevents the general public from being able to use the site, submit phony grades or post irrelevant questions and answers.</p>
+<p>Even though the current version of stacsnet does not contain copy over any studres content, I have implemented some authentication features to prevent public access to the site. In order to use most of the features stacsnet, you must create an account, and to do this you need to prove you have acceess to a valid @st-andrews.ac.uk email address. An email address under the st-andrews domain is given to each student when they matriculate. I couldnt find a similar method to restrict users to only computer science students, although I wasnt particularly interested in doing this anyway because whilst stacsnet was designed specifically for computer science students, it implements a framework that could easily be adapted for students studying other subjects or at other universities also.</p>
 
-<p>Its a bit of an understatement to say that St. Andrews didnt really put the student first, and marking of grades and exams was on occassion was blatantly absurd. I do recognise this to be a problem not just at St. Andrews but across almost all big univerities, and I hoped that ultimately multiple different universities would adopt their own version of this platform as a private intranet, and these networks could then be somehow linked together. Students across universities could collaborate with eachother and share resources, and see how each other are being marked and exactly what level of coursework and exams you could expect. I think not only would this improve student satisfaction but it would put pressure on the university teaching staff to deliver a better and more consistent educational service.</p>
+<p>The current authentication prevents the general public from being able to use the site, submit phony grades or post irrelevant questions and answers.</p>
 
-<p>Whilst stacsnet was designed specifically for computer science students, it implements a framework that could easily be adapted for students studying other subjects or at other universities also. All the major features I have briefly described above, I have explored and developed signficantly in this demo site.</p>
+<p>Its a bit of an understatement to say that St. Andrews didnt really put the student first, and marking of grades and exams was on occassion was blatantly absurd. I do recognise this to be a problem not just at St. Andrews but across almost all big univerities, and I envisaged a world in which multiple different universities would adopt their own version of this platform as a private intranet, and these networks could then be somehow linked together. Students across universities could collaborate with eachother and share resources, and see how each other are being marked and exactly what level of coursework and exams you could expect. I think not only would this improve student satisfaction but it would put pressure on the university teaching staff to deliver a better and more consistent educational service.</p>
 
 <p>The screenshots below illustrate two of these features in further detail:</p>
 
@@ -148,8 +157,9 @@ Other statistical analysis metrics and measure of central tendency such as stand
     <figcaption>Replying to questions</figcaption>
 </figure>
 
-<p>I wrote stacsnet mainly using the MVC framework for ASP.NET core (C#). I used SQLite and entity framework core with for the database, and theres a fair amount of javascript also with some Vue components and <a href="https://www.github.com/nfs002/stacsnet"> Ive open sourced it on my github page.</a>
-I did deploy also the site for a while on a cheap linux vps. The built-in server for MVC is called Kestrel and can only listen on localhost so I also had to set up an nginx reverse proxy. Unfortunately, the university didnt like this idea and wouldnt allow me to promote it, so eventually I took the site down.</p>
+<p>I wrote stacsnet using the MVC framework for ASP.NET core (C#). I used SQLite and entity framework core with for all querying and database functions, and theres a fair amount of Vue components/javascript in the Views.</p>
+
+<p>I did deploy also the site for a while on a cheap linux VPS. The built-in server for MVC is called Kestrel and can only listen on localhost so I also had to set up an nginx reverse proxy. Unfortunately, the university didnt like this idea and wouldnt allow me to promote it, so eventually I took the site down, but <a href="https://www.github.com/nfs002/stacsnet"> ive open sourced it on my github page.</a></p>
 
                     </div>  
 

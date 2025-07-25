@@ -12,4 +12,4 @@
 
 Jekyll builds the static html content into the *docs/* directory, which is configured as the site root on GitHub.
 
-The default branch unfortunately happens to be called 'sources' but it could just as well be 'master' or 'main'
+The default branch is 'sources' but it could just as well be 'master' or 'main', there was no need to change it.
