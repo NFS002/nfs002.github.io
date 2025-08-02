@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://nfs002.github.io/</link>
     <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 29 Jul 2025 09:58:51 +0100</pubDate>
-    <lastBuildDate>Tue, 29 Jul 2025 09:58:51 +0100</lastBuildDate>
+    <pubDate>Sat, 02 Aug 2025 23:02:37 +0100</pubDate>
+    <lastBuildDate>Sat, 02 Aug 2025 23:02:37 +0100</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
       
     
@@ -692,7 +692,7 @@ General usage:
     &lt;figcaption&gt;Searching previous downloads&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;I wrote this in python 3, trying not to use too many external dependencies, and &lt;a href=&quot;https://www.github.com/nfs002/downloadmp3&quot;&gt; its available to clone or download on my github page. &lt;/a&gt; Ive verified it on MAC OS Mojave and Ubuntu 18.04 but I can vouch for Windows.&lt;/p&gt;
+&lt;p&gt;I wrote this in python 3, trying not to use too many external dependencies, and &lt;a href=&quot;https://www.github.com/nfs002/downloadmp3&quot;&gt; its available to clone or download on my github page. &lt;/a&gt; Ive verified it on MAC OS Mojave and Ubuntu 18.04 but I can vouch for other platforms.&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
         
