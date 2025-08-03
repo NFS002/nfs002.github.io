@@ -5,8 +5,8 @@
     <description>Personal blog etc ...</description>
     <link>https://nfs002.github.io/</link>
     <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Aug 2025 23:02:37 +0100</pubDate>
-    <lastBuildDate>Sat, 02 Aug 2025 23:02:37 +0100</lastBuildDate>
+    <pubDate>Mon, 04 Aug 2025 00:57:40 +0100</pubDate>
+    <lastBuildDate>Mon, 04 Aug 2025 00:57:40 +0100</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
       
     
@@ -271,7 +271,7 @@ but if you were to pass an object ideniifier as described above, the path would 
     
     <item>
         <title>An interactive neural network visualisation</title>
-        <description>&lt;h3 id=&quot;an-interactive-data-visualisation-of-a-neural-network&quot;&gt;An interactive data visualisation of a neural network&lt;/h3&gt;
+        <description>&lt;p&gt;&lt;strong&gt;** Updated 4th August 2025: I just want to re-emphasize that this project was heavily forked from tensorflow… I tweaked it a tiny bit, but its like 99% retweet.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
     &lt;iframe height=&quot;900&quot; width=&quot;1100&quot; style=&quot;border:none&quot; src=&quot;/nnviz/index.html&quot;&gt;
@@ -281,15 +281,14 @@ but if you were to pass an object ideniifier as described above, the path would 
 &lt;h4 id=&quot;running-the-visualisation-locally&quot;&gt;Running the visualisation locally&lt;/h4&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;Download the source code &lt;a href=&quot;https://github.com/NFS002/nnviz&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i&lt;/code&gt; to install dependencies&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm run build&lt;/code&gt; to compile the app and place it in the dist/ directory&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm run serve&lt;/code&gt; to serve from the dist/ directory and open a page on your browser.&lt;/li&gt;
   &lt;li&gt;For a fast edit-refresh cycle when developing run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm run serve-watch&lt;/code&gt;. This will start an http server and automatically re-compile the TypeScript, HTML and CSS files whenever they change.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Written all in typescript, and open-sourced &lt;a href=&quot;https://github.com/NFS002/nnviz&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;all-credit-goes-to-tensorflow---i-was-simply-repurposing-their-work&quot;&gt;All credit goes to &lt;a href=&quot;https://playground.tensorflow.org/&quot;&gt;Tensorflow&lt;/a&gt; - I was simply repurposing their work.&lt;/h2&gt;
+&lt;h2 id=&quot;all-credit-goes-to-tensorflow-for-the-original&quot;&gt;All credit goes to &lt;a href=&quot;https://playground.tensorflow.org/&quot;&gt;Tensorflow&lt;/a&gt; for the original.&lt;/h2&gt;
 </description>
         <pubDate>Wed, 13 Jul 2022 00:00:00 +0100</pubDate>
         
@@ -532,14 +531,14 @@ and the limits to economic growth. The solidity code is open sourced on my &lt;a
     
     <item>
         <title>Gallery: P2P home-gallery network for artists and exhibitors</title>
-        <description>&lt;p&gt;&lt;em&gt;** Updated 28th July 2025: This was a great idea and a few people encouraged me to take it further, but around the same time as I was developing this, my work load rapidly increased, so I didnt have time to take this any further. It was a great idea though, Im dissapointed it didnt work out. &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt; used to offer a pretty good free tier I could use to host some databases, but after a few yearx, they took it down, which provoked a suprising reaction from the community. The tech stack I chose seems sextremely niche, and Im surpised at myself for having gone for this&lt;/em&gt;&lt;/p&gt;
+        <description>&lt;p&gt;_** Updated 28th July 2025: This was a great idea and a few people encouraged me to take it further, but around the same time as I was developing this, my work load rapidly increased, so I didnt have time to take this any further, but Im dissapointed it didnt work out. &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt; used to offer a pretty good free tier I could use to host some databases, but after a few years, they took it down, which provoked a suprising reaction from the community. The tech stack I chose seems a bit niche in hindsight, and Im surpised at myself for having gone for this, and I suspect these technologies may have ended up as a blocker to long term maintenance/support as well.&lt;/p&gt;
 &lt;figure style=&quot;text-align:center&quot;&gt;
     &lt;img src=&quot;/images/photo-grid/gallery.png&quot; alt=&quot;Gallery logo&quot; /&gt;
 &lt;/figure&gt;
 
 &lt;h1 id=&quot;gallery&quot;&gt;Gallery&lt;/h1&gt;
 
-&lt;h3 id=&quot;gallery-is-a-simple-web-app-that-builds-a-network-based-on-3-users&quot;&gt;Gallery is a simple web app that builds a network based on 3 users:&lt;/h3&gt;
+&lt;h3 id=&quot;gallery-is-a-simple-web-app-that-builds-a-network-based-on-3-user-types&quot;&gt;Gallery is a simple web app that builds a network based on 3 user types:&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -549,7 +548,7 @@ some artists work whom you have met and spoken with to the public on arranged ti
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Artists are pretty much what you would expect. For example, someone who has created a small collection of
-pottery can sign up to this platform, contact hosts in their area and hopefully arrange a home exhibition.00&lt;/p&gt;
+pottery can sign up to this platform, contact hosts in their area and hopefully arrange a home exhibition.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Viewers, anyone with an interest in appreciating art can browse current exhibitions near their location, and email the host via gallery to check if they can come for a viewing.&lt;/p&gt;
@@ -588,7 +587,7 @@ pottery can sign up to this platform, contact hosts in their area and hopefully 
     
     <item>
         <title>TinderCatfish: A social network for tinder users</title>
-        <description>&lt;p&gt;&lt;em&gt;** Updated 28th July 2025: After I uploaded this to the Chrome store, Tinder very quickly found it and asked me to take it down, and I didnt wanna risk a legal bottle, so I did. Fortunately, Ive made the repository public, so you can dowload it from&lt;a href=&quot;https://github.com/NFS002/TinderCatfish&quot;&gt;Github page&lt;/a&gt;and run it locally&lt;/em&gt;&lt;/p&gt;
+        <description>&lt;p&gt;_** Updated 28th July 2025: After I uploaded this to the Chrome store, Tinder very quickly found it and asked me to take it down, and I didnt wanna risk a legal bottle, so I just did. Fortunately, Ive made the repository public, so you can dowload it from&lt;a href=&quot;https://github.com/NFS002/TinderCatfish&quot;&gt;Github page&lt;/a&gt;and run it in chrome developer mode. Its a shame because I think this was one of my funnest projects with the biggest commercial appeal.&lt;/p&gt;
 
 &lt;figure style=&quot;text-align:center&quot;&gt;
     &lt;img src=&quot;/images/catfish/logo.png&quot; alt=&quot;TinderCatfish logo&quot; /&gt;
