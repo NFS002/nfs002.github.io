@@ -103,6 +103,8 @@
 <h1 id="-kefei-">💙 Kefei 💙</h1>
 <h2 id="persistent-variables-in-kotlin">Persistent Variables in Kotlin</h2>
 
+<p><strong>** Updated 22 August 2025: I broke up with Kefei a few years ago and yeah I do recognise how weird this whole thing is. Im tempted to take it down but i guess its kinda funny or interesting, or something…not sure. Either way, its a cool idea and I put a lot of work into it, so in that sense it deserves a spot on the team</strong></p>
+
 <p>Ive always thought databases were a total pain to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
 Pretty much every server/api/application I have ever worked on that had a genuine use case needed to persist data of some sort and had a database integration, although in many of these cases, the data being persisted could of easily been stored in a local data structure.</p>
 
@@ -116,7 +118,7 @@ Pretty much every server/api/application I have ever worked on that had a genuin
     <span class="nd">@Persist</span>
     <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">myImportantList:</span> <span class="nc">MutableList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="cm">/* The value of this field is persisted */</span>
 
-    <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">notImportantStr:</span> <span class="nc">String</span> <span class="cm">/* The value of this field is not persistedm its just a regular class property */</span>
+    <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">notImportantStr:</span> <span class="nc">String</span> <span class="cm">/* The value of this field is not persisted, its just a regular class property */</span>
 
     <span class="nd">@Persist</span>
     <span class="n">lateinit</span> <span class="kt">var</span> <span class="nl">myImportantStr:</span> <span class="nc">String</span> <span class="cm">/* The value of this field is persisted */</span>
@@ -142,7 +144,7 @@ Pretty much every server/api/application I have ever worked on that had a genuin
   <li>
     <p>When you instantiate a class that extends from the abstract base class Persistable, you can pass in a constructor paramater, such as an object identifier or UUID so that the path where the values for this object will be saved will derived from this value. For example, usually the path were object value will be saved is:
 ` ./${options.dir}/${class.name}/${field.class.name}/${field.name} `
-but if you were to pass an object ideniifier as described above, the path would now become:
+but if you were to pass an object idenitifier as described above, the path would now become:
 ` ./${options.dir}/${class.name}/${object.identifier}/${field.class.name}/${field.name} `</p>
   </li>
 </ol>

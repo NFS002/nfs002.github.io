@@ -5,14 +5,14 @@
     <description>Personal blog etc ...</description>
     <link>https://nfs002.github.io/</link>
     <atom:link href="nfs002.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Aug 2025 00:57:40 +0100</pubDate>
-    <lastBuildDate>Mon, 04 Aug 2025 00:57:40 +0100</lastBuildDate>
+    <pubDate>Sat, 23 Aug 2025 00:36:58 +0100</pubDate>
+    <lastBuildDate>Sat, 23 Aug 2025 00:36:58 +0100</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
       
     
     <item>
         <title>Auth templates</title>
-        <description>&lt;h2 id=&quot;simple-golang-auth-templates&quot;&gt;Simple golang auth templates&lt;/h2&gt;
+        <description>&lt;p&gt;&lt;strong&gt;** Updated 22 August 2025. To be clear, this post is comprised of two projects: An OAuth 2.0 template, and a simple token authentication template that manages users, logins and tokens using its own database. I think the reason why I did this was at least somewhat because I couldnt understand the big deal behind the supposed much increased level of security by using OAuth 2.0 or indeed any cryptographic authentication protocol vs. secure random authorisation header tokens managed properly, so I wrote these to put that theory to test/enhance my understanding… both the projects worked well, and yet I think its fairly well established that implementing and managing your own authentication is a rabbit hole and a bad idea. So sadly, im none the wiser…&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post is somehwat similar to the &lt;a href=&quot;https://nfs002.github.io/posts/2023-01-09/kefei.html&quot;&gt;kefei&lt;/a&gt; post in that is was motivated by a very common developer process that I felt was unecessarilly complicated. However, in this case, that process was not a database connection, but protecting your API.&lt;/p&gt;
 
@@ -27,7 +27,7 @@ OAuth 2.0 is widly regarded as one of the highest security standards, and the ma
 
 &lt;p&gt;Previously, when I have wanted to set up OAuth2.0 on an app, it has been a fiddly process to say the least, and Im sure others had a similar experience. While OAuth 2.0 provides a strong foundation for secure authorization, the overall security of any system utilizing OAuth 2.0 depends on the implementation and the surrounding security measures.&lt;/p&gt;
 
-&lt;p&gt;Therefore, to both consolidate my own knowledge and provoide a useful starting point to others, I have written this application template with the following features.&lt;/p&gt;
+&lt;p&gt;Therefore, to both consolidate my own knowledge and provide a useful starting point to others, I have written this application template with the following features.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -41,7 +41,7 @@ OAuth 2.0 is widly regarded as one of the highest security standards, and the ma
           &lt;li&gt;Google&lt;/li&gt;
           &lt;li&gt;Apple&lt;/li&gt;
           &lt;li&gt;Facebook&lt;/li&gt;
-          &lt;li&gt;(Username, email) DB&lt;/li&gt;
+          &lt;li&gt;(Username, email) on Auth0’s internal DB&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -130,7 +130,9 @@ OAuth 2.0 is widly regarded as one of the highest security standards, and the ma
     
     <item>
         <title>Blokd</title>
-        <description>&lt;figure&gt;
+        <description>&lt;p&gt;&lt;strong&gt;** Updated 22 August 2025: I cant believe I only wrote this post last year, it feels so long ago. Anyway, this one was really cool, and I did try and get it up and running recently, but I couldnt find the right configuration for the different versions of JVM, Kotlin, and the various gradle build plugins I was using. Hopefully ill find the motivation to pick it up again although unfortunately I think it would probably require some paid products or services where I was using a free trial before. If i do bring this back to life, ill probably take the opportunity to rewrite and simplify a bunch as well&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure&gt;
     &lt;img width=&quot;200px&quot; src=&quot;/images/blokd/logo.png&quot; alt=&quot;Blokd logo&quot; /&gt;
 &lt;/figure&gt;
 
@@ -168,11 +170,11 @@ The core Blockchain framework and each client node was 100% in Kotlin, packaged 
     
     <item>
         <title>Swimp3</title>
-        <description>&lt;h1 id=&quot;swimp3&quot;&gt;Swimp3&lt;/h1&gt;
+        <description>&lt;p&gt;&lt;strong&gt;** Updated 22 August 2025: It still works, so I do use it fairly regularly.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This mini-project is so simple in fact it hardly deserves its own post, but its a bit of programming I did partly for fun and partly to solve a practical problem I faced in my daily life so in that sense it seems fair enough to write at least a little bit about it.&lt;/p&gt;
 
-&lt;p&gt;Swimp3 is a simple CLI program written in python that can either create a new randomly generated spotify playlist (given a larger ‘seed’ playlist to make a subselection from), and then download that playlust, or just directly download the given playlist to a collection of mp3 files.&lt;/p&gt;
+&lt;p&gt;Swimp3 is a CLI program written in python that can either create a new randomly generated spotify playlist (given a larger ‘seed’ playlist to make a subselection from), and then download that playlist, or just directly download the given playlist to a collection of mp3 files.&lt;/p&gt;
 
 &lt;p&gt;Im using a third party library &lt;a href=&quot;https://github.com/spotDL/spotify-downloader&quot;&gt;(spotdl)&lt;/a&gt; to interact with the spotify API so this is really not a big deal. I use it because I go swimming quite a lot (much less in the winter) and I have some underwater headphones to listen to music or podcasts while I swim, which really does give me a lot of motivation and make the whole experience more enjoyable.&lt;/p&gt;
 
@@ -204,6 +206,8 @@ The core Blockchain framework and each client node was 100% in Kotlin, packaged 
 &lt;h1 id=&quot;-kefei-&quot;&gt;💙 Kefei 💙&lt;/h1&gt;
 &lt;h2 id=&quot;persistent-variables-in-kotlin&quot;&gt;Persistent Variables in Kotlin&lt;/h2&gt;
 
+&lt;p&gt;&lt;strong&gt;** Updated 22 August 2025: I broke up with Kefei a few years ago and yeah I do recognise how weird this whole thing is. Im tempted to take it down but i guess its kinda funny or interesting, or something…not sure. Either way, its a cool idea and I put a lot of work into it, so in that sense it deserves a spot on the team&lt;/strong&gt;&lt;/p&gt;
+
 &lt;p&gt;Ive always thought databases were a total pain to setup and as a developer I found it genuinely suprising why there werent more technologies that focused on easily integrating databases into your application without so much setup and configuration. 
 Pretty much every server/api/application I have ever worked on that had a genuine use case needed to persist data of some sort and had a database integration, although in many of these cases, the data being persisted could of easily been stored in a local data structure.&lt;/p&gt;
 
@@ -217,7 +221,7 @@ Pretty much every server/api/application I have ever worked on that had a genuin
     &lt;span class=&quot;nd&quot;&gt;@Persist&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;myImportantList:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MutableList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is persisted */&lt;/span&gt;
 
-    &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;notImportantStr:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is not persistedm its just a regular class property */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;notImportantStr:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is not persisted, its just a regular class property */&lt;/span&gt;
 
     &lt;span class=&quot;nd&quot;&gt;@Persist&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;myImportantStr:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* The value of this field is persisted */&lt;/span&gt;
@@ -243,7 +247,7 @@ Pretty much every server/api/application I have ever worked on that had a genuin
   &lt;li&gt;
     &lt;p&gt;When you instantiate a class that extends from the abstract base class Persistable, you can pass in a constructor paramater, such as an object identifier or UUID so that the path where the values for this object will be saved will derived from this value. For example, usually the path were object value will be saved is:
 ` ./${options.dir}/${class.name}/${field.class.name}/${field.name} `
-but if you were to pass an object ideniifier as described above, the path would now become:
+but if you were to pass an object idenitifier as described above, the path would now become:
 ` ./${options.dir}/${class.name}/${object.identifier}/${field.class.name}/${field.name} `&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;

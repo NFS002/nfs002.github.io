@@ -6,7 +6,7 @@ tags: [ golang api auth programming ]
 date-string: 25th April 2024
 ---
 
-## Simple golang auth templates
+__** Updated 22 August 2025. To be clear, this post is comprised of two projects: An OAuth 2.0 template, and a simple token authentication template that manages users, logins and tokens using its own database. I think the reason why I did this was at least somewhat because I couldnt understand the big deal behind the supposed much increased level of security by using OAuth 2.0 or indeed any cryptographic authentication protocol vs. secure random authorisation header tokens managed properly, so I wrote these to put that theory to test/enhance my understanding... both the projects worked well, and yet I think its fairly well established that implementing and managing your own authentication is a rabbit hole and a bad idea. So sadly, im none the wiser...__
 
 This post is somehwat similar to the [kefei](https://nfs002.github.io/posts/2023-01-09/kefei.html) post in that is was motivated by a very common developer process that I felt was unecessarilly complicated. However, in this case, that process was not a database connection, but protecting your API.
 
@@ -21,7 +21,7 @@ OAuth 2.0 is widly regarded as one of the highest security standards, and the ma
 
 Previously, when I have wanted to set up OAuth2.0 on an app, it has been a fiddly process to say the least, and Im sure others had a similar experience. While OAuth 2.0 provides a strong foundation for secure authorization, the overall security of any system utilizing OAuth 2.0 depends on the implementation and the surrounding security measures.
 
-Therefore, to both consolidate my own knowledge and provoide a useful starting point to others, I have written this application template with the following features.
+Therefore, to both consolidate my own knowledge and provide a useful starting point to others, I have written this application template with the following features.
 
 - Simple REST API using the popular [gin](https://github.com/gin-gonic/gin) framework for golang.
 
@@ -31,13 +31,15 @@ Therefore, to both consolidate my own knowledge and provoide a useful starting p
         - Google 
         - Apple
         - Facebook
-        - (Username, email) DB
+        - (Username, email) on Auth0's internal DB
 
 - All endpoints */api/(host\|exhibition\|artist\|user)* require JWT authentication 
 
 - Additionally, the GET /api/host endpoint requires a token with the `read:host` permission.
 
 *More information, including my particular Auth0 Account setup, is given in the [repository README](https://github.com/nfs002/go-template-v2)*
+
+
 
 ### [Simple token authentication](https://github.com/NFS002/go-template-v1)
 
